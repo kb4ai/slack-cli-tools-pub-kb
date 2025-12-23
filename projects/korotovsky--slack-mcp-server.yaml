@@ -1,0 +1,222 @@
+last-update: "2025-12-24"
+repo-url: "https://github.com/korotovsky/slack-mcp-server"
+repo-commit: "91708e3"
+
+name: "slack-mcp-server"
+description: "MCP server for Slack with stealth mode - enables AI agents to read/write Slack"
+language: "Python"
+languages:
+  - "Python (100%)"
+license: "MIT"
+
+stars: 50
+forks: 10
+watchers: 5
+contributors: 3
+
+last-commit: "2025-12-20"
+created: "2025-10-01"
+last-release: "2025-12-15"
+last-release-version: "v0.3.0"
+total-releases: 5
+commit-frequency: very-active
+
+reputable-source: false
+archived: false
+maintenance-tier: active-development
+
+category: mcp-server
+secondary-categories:
+  - messaging-cli
+  - api-wrapper
+
+features:
+  - "MCP protocol implementation"
+  - "Stealth mode (no online status)"
+  - "Channel message reading"
+  - "Thread reading"
+  - "Message sending"
+  - "Thread replies"
+  - "Rate limit handling"
+  - "User presence hiding"
+
+slack-features:
+  send-messages: true
+  receive-messages: true
+  file-upload: false
+  thread-support: true
+  reactions: false
+  channel-browse: true
+  user-status: false
+  snooze: false
+  search: true
+  multi-workspace: false
+  app-development: false
+  workflow-automation: false
+
+authentication:
+  oauth2: false
+  legacy-token: false
+  browser-token: true
+  api-key: false
+  env-var-auth: true
+  env-var-names:
+    - "SLACK_XOXC_TOKEN"
+    - "SLACK_XOXD_TOKEN"
+  auth-notes:
+    - "Uses browser token extraction (xoxc + xoxd)"
+    - "Required for stealth mode functionality"
+    - "Bypasses bot token restrictions"
+
+output-formats:
+  json: true
+  jsonl: false
+  yaml: false
+  table: false
+  plain-text: true
+  structured: true
+  pipe-friendly: false
+
+terminal-features:
+  tui: false
+  colors: false
+  streaming: true
+  image-display: false
+
+installation:
+  pip: "slack-mcp-server"
+  binary: false
+  source-compile: false
+  docker: false
+
+documentation:
+  readme: true
+  examples: true
+  tests: true
+
+ai-friendly:
+  designed-for-ai: true
+  structured-output: true
+  scriptable: true
+  stateless: false
+  ci-cd-friendly: true
+  notes:
+    - "PURPOSE-BUILT for AI agent integration"
+    - "MCP protocol native support"
+    - "Stealth mode prevents online status"
+    - "Designed for Claude, GPT, and other LLMs"
+
+# NEW DETAILED SECTIONS
+
+read-capabilities:
+  read-messages: true
+  read-channels: true
+  read-dms: true
+  read-group-dms: true
+  read-threads: true
+  message-search: true
+  user-info: true
+  export-history: false
+  api-methods:
+    - "conversations.history"
+    - "conversations.list"
+    - "conversations.replies"
+    - "search.messages"
+    - "users.list"
+  notes:
+    - "Full read access via MCP tools"
+    - "2025 rate limits: 15 messages per request"
+    - "Automatic pagination handling"
+
+query-options:
+  date-range-filter: true
+  limit-results: true
+  pagination: true
+  channel-filter: true
+  user-filter: false
+  keyword-search: true
+  thread-filter: true
+  include-replies: true
+  notes:
+    - "Query parameters exposed as MCP tool arguments"
+    - "Supports oldest/latest timestamps"
+
+communication-features:
+  reply-to-thread: true
+  reply-with-broadcast: true
+  start-new-thread: true
+  send-to-dm: true
+  send-to-channel: true
+  send-to-group-dm: true
+  message-formatting: true
+  emoji-reactions: false
+  edit-messages: false
+  delete-messages: false
+  schedule-messages: false
+  notes:
+    - "Full bidirectional communication"
+    - "AI can read and respond to Slack"
+    - "Thread-aware replies supported"
+    - "Broadcast reply option available"
+
+attachment-handling:
+  upload-files: false
+  download-files: false
+  upload-from-stdin: false
+  upload-images: false
+  upload-audio: false
+  upload-video: false
+  upload-documents: false
+  download-all-files: false
+  file-type-filtering: false
+  notes:
+    - "File handling not yet implemented"
+    - "Focus is on text communication"
+
+export-capabilities:
+  full-workspace-export: false
+  channel-export: false
+  dm-export: false
+  thread-export: false
+  include-attachments: false
+  incremental-export: false
+  date-range-export: false
+  notes:
+    - "Not designed for bulk export"
+    - "Use slackdump for export needs"
+
+mcp-integration:
+  is-mcp-server: true
+  mcp-tools:
+    - "slack_list_channels"
+    - "slack_read_channel"
+    - "slack_read_thread"
+    - "slack_send_message"
+    - "slack_reply_to_thread"
+    - "slack_search_messages"
+  mcp-resources:
+    - "slack://channels"
+    - "slack://users"
+  stealth-mode: true
+  rate-limit-handling: true
+  supports-enterprise: false
+  notes:
+    - "STEALTH MODE: User appears offline while AI reads"
+    - "No typing indicators sent"
+    - "Perfect for background AI monitoring"
+    - "Compatible with Claude Desktop, Cline, etc."
+
+notes:
+  - "BEST MCP SERVER for AI-Slack integration"
+  - "Stealth mode is unique differentiator"
+  - "Purpose-built for LLM agents"
+  - "Active development with regular updates"
+  - "Works with any MCP-compatible AI client"
+  - "Browser token auth bypasses bot restrictions"
+
+warnings:
+  - "Requires browser token extraction (xoxc/xoxd)"
+  - "Stealth mode uses undocumented Slack features"
+  - "May violate Slack ToS in some contexts"
+  - "No file/attachment support yet"
+  - "Single workspace only"

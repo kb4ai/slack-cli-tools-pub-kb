@@ -204,6 +204,8 @@ fields:
       - libpurple-plugin    # Plugin for Pidgin/Finch
       - bot-framework       # Framework for building bots
       - api-wrapper         # Low-level API wrapper/library
+      - export-tool         # Bulk export/backup tool
+      - mcp-server          # MCP server for AI agent integration
 
   secondary-categories:
     description: "Additional applicable categories"
@@ -459,6 +461,243 @@ fields:
         description: "AI integration notes"
 
   # ---------------------------------------------------------------------------
+  # READ CAPABILITIES (Critical for querying/reading messages)
+  # ---------------------------------------------------------------------------
+  read-capabilities:
+    description: "Ability to read/query Slack data"
+    type: object
+    required: false
+    properties:
+      read-messages:
+        type: boolean
+        description: "Can query/read message history"
+      read-channels:
+        type: boolean
+        description: "Can list and read channel info"
+      read-dms:
+        type: boolean
+        description: "Can query direct messages"
+      read-group-dms:
+        type: boolean
+        description: "Can query multi-party DM groups (MPIMs)"
+      read-threads:
+        type: boolean
+        description: "Can read thread replies within messages"
+      message-search:
+        type: boolean
+        description: "Can search across messages"
+      user-info:
+        type: boolean
+        description: "Can read user profiles/info"
+      export-history:
+        type: boolean
+        description: "Can export conversation history in bulk"
+      api-methods:
+        type: array
+        description: "Slack API methods used for reading"
+        example:
+          - "conversations.history"
+          - "conversations.replies"
+          - "search.messages"
+      notes:
+        type: array
+        description: "Notes about read capabilities"
+
+  # ---------------------------------------------------------------------------
+  # QUERY OPTIONS (Filtering and selection when reading)
+  # ---------------------------------------------------------------------------
+  query-options:
+    description: "Filtering options when querying data"
+    type: object
+    required: false
+    properties:
+      date-range-filter:
+        type: boolean
+        description: "Can filter by date range (oldest/latest)"
+      limit-results:
+        type: boolean
+        description: "Can limit number of results returned"
+      pagination:
+        type: boolean
+        description: "Supports cursor-based pagination"
+      channel-filter:
+        type: boolean
+        description: "Can filter by specific channel"
+      user-filter:
+        type: boolean
+        description: "Can filter by specific user"
+      keyword-search:
+        type: boolean
+        description: "Can search by keywords/text"
+      thread-filter:
+        type: boolean
+        description: "Can filter to specific thread (thread_ts)"
+      include-replies:
+        type: boolean
+        description: "Can include thread replies in results"
+      notes:
+        type: array
+        description: "Notes about query options"
+
+  # ---------------------------------------------------------------------------
+  # COMMUNICATION FEATURES (Responding and interacting)
+  # ---------------------------------------------------------------------------
+  communication-features:
+    description: "Features for responding and interacting"
+    type: object
+    required: false
+    properties:
+      reply-to-thread:
+        type: boolean
+        description: "Can reply to existing threads (thread_ts)"
+      reply-with-broadcast:
+        type: boolean
+        description: "Can reply with 'Also send to channel' option"
+      start-new-thread:
+        type: boolean
+        description: "Can start a new thread on a message"
+      send-to-dm:
+        type: boolean
+        description: "Can send direct messages"
+      send-to-channel:
+        type: boolean
+        description: "Can send to public/private channels"
+      send-to-group-dm:
+        type: boolean
+        description: "Can send to multi-party DMs"
+      message-formatting:
+        type: boolean
+        description: "Supports Slack mrkdwn formatting"
+      emoji-reactions:
+        type: boolean
+        description: "Can add/remove emoji reactions"
+      edit-messages:
+        type: boolean
+        description: "Can edit sent messages"
+      delete-messages:
+        type: boolean
+        description: "Can delete messages"
+      schedule-messages:
+        type: boolean
+        description: "Can schedule messages for later"
+      notes:
+        type: array
+        description: "Notes about communication features"
+
+  # ---------------------------------------------------------------------------
+  # ATTACHMENT HANDLING (Files, media upload/download)
+  # ---------------------------------------------------------------------------
+  attachment-handling:
+    description: "File and media handling capabilities"
+    type: object
+    required: false
+    properties:
+      upload-files:
+        type: boolean
+        description: "Can upload files as attachments"
+      download-files:
+        type: boolean
+        description: "Can download file attachments"
+      upload-from-stdin:
+        type: boolean
+        description: "Can upload content piped from stdin"
+      upload-images:
+        type: boolean
+        description: "Supports image file uploads"
+      upload-audio:
+        type: boolean
+        description: "Supports audio file uploads"
+      upload-video:
+        type: boolean
+        description: "Supports video file uploads"
+      upload-documents:
+        type: boolean
+        description: "Supports document file uploads (PDF, etc.)"
+      download-all-files:
+        type: boolean
+        description: "Can bulk download all files in channel/export"
+      file-type-filtering:
+        type: boolean
+        description: "Can filter downloads by file type"
+      max-file-size:
+        type: string
+        description: "Maximum file size supported"
+      notes:
+        type: array
+        description: "Notes about attachment handling"
+
+  # ---------------------------------------------------------------------------
+  # EXPORT CAPABILITIES (Bulk data export)
+  # ---------------------------------------------------------------------------
+  export-capabilities:
+    description: "Bulk export and backup features"
+    type: object
+    required: false
+    properties:
+      full-workspace-export:
+        type: boolean
+        description: "Can export entire workspace"
+      channel-export:
+        type: boolean
+        description: "Can export specific channels"
+      dm-export:
+        type: boolean
+        description: "Can export direct messages"
+      thread-export:
+        type: boolean
+        description: "Can export thread conversations"
+      include-attachments:
+        type: boolean
+        description: "Exports include file attachments"
+      export-format:
+        type: array
+        description: "Supported export formats"
+        example:
+          - "json"
+          - "jsonl"
+          - "csv"
+          - "text"
+      incremental-export:
+        type: boolean
+        description: "Supports incremental/delta exports"
+      date-range-export:
+        type: boolean
+        description: "Can export specific date ranges"
+      notes:
+        type: array
+        description: "Notes about export capabilities"
+
+  # ---------------------------------------------------------------------------
+  # MCP INTEGRATION (Model Context Protocol for AI)
+  # ---------------------------------------------------------------------------
+  mcp-integration:
+    description: "Model Context Protocol server capabilities"
+    type: object
+    required: false
+    properties:
+      is-mcp-server:
+        type: boolean
+        description: "Is an MCP server implementation"
+      mcp-tools:
+        type: array
+        description: "List of MCP tools exposed"
+      mcp-resources:
+        type: array
+        description: "List of MCP resources exposed"
+      stealth-mode:
+        type: boolean
+        description: "Supports stealth/read-only mode (no online status)"
+      rate-limit-handling:
+        type: boolean
+        description: "Handles Slack rate limits gracefully"
+      supports-enterprise:
+        type: boolean
+        description: "Works with Slack Enterprise Grid"
+      notes:
+        type: array
+        description: "Notes about MCP integration"
+
+  # ---------------------------------------------------------------------------
   # NOTES
   # ---------------------------------------------------------------------------
   notes:
@@ -507,6 +746,17 @@ categories:
     description: "Plugins for Pidgin/Finch that add Slack support"
     examples:
       - "dylex/slack-libpurple"
+
+  export-tool:
+    description: "Tools for bulk export/backup of Slack data"
+    examples:
+      - "rusq/slackdump"
+
+  mcp-server:
+    description: "Model Context Protocol servers for AI agent integration with Slack"
+    examples:
+      - "korotovsky/slack-mcp-server"
+      - "ubie-oss/slack-mcp-server"
 
 # =============================================================================
 # MAINTENANCE TIER DEFINITIONS

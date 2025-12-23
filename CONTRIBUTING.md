@@ -148,6 +148,8 @@ done
 * `libpurple-plugin` - Pidgin/Finch plugins
 * `bot-framework` - Bot frameworks
 * `api-wrapper` - API wrappers
+* `export-tool` - Bulk export/backup tools
+* `mcp-server` - MCP server implementations
 
 ### Maintenance Tiers
 
@@ -156,6 +158,181 @@ done
 * `community-sustained` - Community contributions
 * `unmaintained` - No activity
 * `archived` - Repository archived
+
+## Data Standards
+
+### Tracking Repository Versions
+
+When analyzing a repository, always record the commit hash you're examining:
+
+```yaml
+repo-commit: "a1b2c3d"  # 7-character commit hash
+```
+
+This ensures reproducibility and allows future reviewers to verify your analysis against the same code version.
+
+**How to get the commit hash:**
+
+```bash
+# Get latest commit from remote
+git ls-remote https://github.com/owner/repo.git HEAD | awk '{print substr($1,1,7)}'
+
+# Or if you have the repo cloned
+cd /path/to/repo
+git rev-parse --short=7 HEAD
+```
+
+### Adding Evidence References
+
+When documenting features or capabilities, include evidence in notes:
+
+```yaml
+read-capabilities:
+  read-messages: true
+  read-channels: true
+  message-search: false
+
+notes:
+  - "Read capabilities verified in src/slack_client.py lines 45-67"
+  - "Uses conversations.history API method (repo-commit: a1b2c3d)"
+  - "No search functionality found in codebase"
+```
+
+**Evidence types:**
+
+* Source code references: `"Found in src/file.py lines 10-20"`
+* API methods used: `"Uses chat.postMessage API method"`
+* Documentation quotes: `"README states: 'supports thread replies'"`
+* Test verification: `"Confirmed in tests/test_threads.py"`
+* Absence proof: `"No implementation found for feature X"`
+
+### Ensuring Reproducibility
+
+To make your analysis reproducible:
+
+1. **Record the version analyzed:**
+
+   ```yaml
+   repo-commit: "a1b2c3d"
+   last-update: "2025-12-24"
+   ```
+
+2. **Document your methodology:**
+
+   ```yaml
+   notes:
+     - "Analysis method: Code review + README documentation"
+     - "Tested features: file upload, message sending"
+     - "Could not test: authentication (no credentials)"
+   ```
+
+3. **Link to specific evidence:**
+
+   ```yaml
+   notes:
+     - "Thread support: src/messaging.py#L123-L145"
+     - "Authentication methods: docs/auth.md"
+   ```
+
+4. **Note uncertainties:**
+
+   ```yaml
+   notes:
+     - "Unknown: Whether rate limiting is handled (no tests found)"
+     - "Unclear: Support for Enterprise Grid (docs mention but no code found)"
+   ```
+
+### New Feature Sections Added
+
+Recent schema expansions include detailed capability tracking:
+
+1. **read-capabilities** - What data can be read/queried
+
+   * `read-messages`, `read-channels`, `read-dms`, `read-group-dms`
+   * `read-threads`, `message-search`, `user-info`, `export-history`
+   * Example: See `projects/rusq--slackdump.yaml`
+
+2. **query-options** - Filtering and search capabilities
+
+   * `date-range-filter`, `limit-results`, `pagination`
+   * `channel-filter`, `user-filter`, `keyword-search`, `thread-filter`
+
+3. **communication-features** - Interaction capabilities
+
+   * `reply-to-thread`, `reply-with-broadcast`, `start-new-thread`
+   * `send-to-dm`, `send-to-channel`, `send-to-group-dm`
+   * `message-formatting`
+
+4. **attachment-handling** - File operations
+
+   * `upload-files`, `download-files`, `upload-from-stdin`
+   * `upload-images`, `upload-audio`, `upload-video`
+
+5. **export-capabilities** - Bulk export features
+
+   * `full-workspace-export`, `channel-export`, `dm-export`
+   * `thread-export`, `include-attachments`
+   * `export-format`: Array of supported formats (json, jsonl, etc.)
+
+6. **mcp-integration** - MCP server features
+
+   * `is-mcp-server`, `stealth-mode`, `rate-limit-handling`
+   * `supports-enterprise`
+   * `mcp-tools`, `mcp-resources`: Arrays of exposed tools/resources
+   * Example: See `projects/korotovsky--slack-mcp-server.yaml`
+
+**Template for comprehensive analysis:**
+
+```yaml
+read-capabilities:
+  read-messages: true
+  read-channels: true
+  read-dms: true
+  read-threads: true
+  message-search: false
+  user-info: true
+  export-history: true
+
+query-options:
+  date-range-filter: true
+  limit-results: true
+  pagination: true
+  channel-filter: true
+  user-filter: false
+  keyword-search: false
+  thread-filter: true
+
+communication-features:
+  reply-to-thread: true
+  reply-with-broadcast: false
+  send-to-dm: true
+  send-to-channel: true
+  send-to-group-dm: false
+  message-formatting: true
+
+attachment-handling:
+  upload-files: true
+  download-files: true
+  upload-from-stdin: true
+  upload-images: true
+  upload-audio: false
+  upload-video: false
+
+export-capabilities:
+  full-workspace-export: false
+  channel-export: true
+  dm-export: true
+  thread-export: true
+  include-attachments: true
+  export-format:
+    - "json"
+    - "jsonl"
+
+notes:
+  - "Analysis based on repo-commit: a1b2c3d"
+  - "Read capabilities verified in src/api_client.go"
+  - "Export format determined from cmd/export/main.go lines 89-102"
+```
 
 ## Code Style
 

@@ -1,4 +1,4 @@
-last-update: "2025-12-23"
+last-update: "2025-12-24"
 repo-url: "https://github.com/slackapi/slack-cli"
 
 name: "slack-cli"
@@ -89,6 +89,77 @@ ai-friendly:
     - "Excellent for CI/CD deployment pipelines"
     - "Service token support enables automation"
 
+# NEW DETAILED SECTIONS
+
+read-capabilities:
+  read-messages: false
+  read-channels: false
+  read-dms: false
+  read-group-dms: false
+  read-threads: false
+  message-search: false
+  user-info: false
+  export-history: false
+  notes:
+    - "NOT for reading Slack messages"
+    - "Only for app development and deployment"
+    - "Activity logs are for app debugging, not message history"
+
+query-options:
+  date-range-filter: false
+  limit-results: false
+  pagination: false
+  channel-filter: false
+  user-filter: false
+  keyword-search: false
+  thread-filter: false
+  include-replies: false
+  notes:
+    - "No message querying capabilities"
+
+communication-features:
+  reply-to-thread: false
+  reply-with-broadcast: false
+  start-new-thread: false
+  send-to-dm: false
+  send-to-channel: false
+  send-to-group-dm: false
+  message-formatting: false
+  emoji-reactions: false
+  edit-messages: false
+  delete-messages: false
+  schedule-messages: false
+  notes:
+    - "Not designed for sending messages"
+    - "Builds apps that can send messages"
+
+attachment-handling:
+  upload-files: false
+  download-files: false
+  upload-from-stdin: false
+  upload-images: false
+  upload-audio: false
+  upload-video: false
+  upload-documents: false
+  download-all-files: false
+  file-type-filtering: false
+  notes:
+    - "No file handling capabilities"
+
+export-capabilities:
+  full-workspace-export: false
+  channel-export: false
+  dm-export: false
+  thread-export: false
+  include-attachments: false
+  incremental-export: false
+  date-range-export: false
+  notes:
+    - "No export capabilities"
+
+mcp-integration:
+  is-mcp-server: false
+
 notes:
   - "Open-sourced on April 10, 2025"
   - "Primary tool for building Slack apps"
@@ -99,4 +170,6 @@ notes:
   - "No terminal image display support (Sixel/iTerm/Kitty)"
 
 warnings:
-  - "Not for daily messaging - focused on app development"
+  - "NOT for daily messaging - focused on app development only"
+  - "Cannot read messages, channels, or threads"
+  - "Use shaharia-lab/slackcli or rusq/slackdump for reading Slack"

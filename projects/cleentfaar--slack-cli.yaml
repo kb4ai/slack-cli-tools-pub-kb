@@ -1,4 +1,4 @@
-last-update: "2025-12-23"
+last-update: "2025-12-24"
 repo-url: "https://github.com/cleentfaar/slack-cli"
 
 name: "slack-cli"
@@ -63,6 +63,76 @@ ai-friendly:
   notes:
     - "Archived - not recommended for any use"
 
+# NEW DETAILED SECTIONS
+
+read-capabilities:
+  read-messages: false
+  read-channels: true
+  read-dms: false
+  read-group-dms: false
+  read-threads: false
+  message-search: false
+  user-info: false
+  export-history: false
+  notes:
+    - "ARCHIVED - do not use"
+    - "Limited API wrapper functionality"
+
+query-options:
+  date-range-filter: false
+  limit-results: false
+  pagination: false
+  channel-filter: false
+  user-filter: false
+  keyword-search: false
+  thread-filter: false
+  include-replies: false
+  notes:
+    - "No query capabilities"
+
+communication-features:
+  reply-to-thread: false
+  reply-with-broadcast: false
+  start-new-thread: false
+  send-to-dm: false
+  send-to-channel: true
+  send-to-group-dm: false
+  message-formatting: false
+  emoji-reactions: false
+  edit-messages: false
+  delete-messages: false
+  schedule-messages: false
+  notes:
+    - "Basic channel posting only"
+    - "ARCHIVED - do not use"
+
+attachment-handling:
+  upload-files: false
+  download-files: false
+  upload-from-stdin: false
+  upload-images: false
+  upload-audio: false
+  upload-video: false
+  upload-documents: false
+  download-all-files: false
+  file-type-filtering: false
+  notes:
+    - "No file handling"
+
+export-capabilities:
+  full-workspace-export: false
+  channel-export: false
+  dm-export: false
+  thread-export: false
+  include-attachments: false
+  incremental-export: false
+  date-range-export: false
+  notes:
+    - "No export capabilities"
+
+mcp-integration:
+  is-mcp-server: false
+
 notes:
   - "Archived on July 12, 2023"
   - "Created December 14, 2014 (one of the earliest Slack CLIs)"
@@ -77,3 +147,4 @@ warnings:
   - "PHP 5.5 requirement is severely outdated"
   - "Dependency on outdated Slack API patterns"
   - "DO NOT USE - security and compatibility concerns"
+  - "Historical interest only"

@@ -1,4 +1,4 @@
-last-update: "2025-12-23"
+last-update: "2025-12-24"
 repo-url: "https://github.com/dylex/slack-libpurple"
 
 name: "slack-libpurple"
@@ -76,6 +76,81 @@ ai-friendly:
     - "GUI/TUI plugin, not for scripting"
     - "Not suitable for automation"
 
+# NEW DETAILED SECTIONS
+
+read-capabilities:
+  read-messages: true
+  read-channels: true
+  read-dms: true
+  read-group-dms: true
+  read-threads: true
+  message-search: false
+  user-info: true
+  export-history: false
+  notes:
+    - "Full read via Pidgin/Finch UI"
+    - "Not scriptable - GUI/TUI only"
+    - "Thread support available"
+
+query-options:
+  date-range-filter: false
+  limit-results: false
+  pagination: false
+  channel-filter: true
+  user-filter: false
+  keyword-search: false
+  thread-filter: false
+  include-replies: true
+  notes:
+    - "Channel selection via UI"
+    - "No programmatic query options"
+
+communication-features:
+  reply-to-thread: true
+  reply-with-broadcast: false
+  start-new-thread: true
+  send-to-dm: true
+  send-to-channel: true
+  send-to-group-dm: true
+  message-formatting: true
+  emoji-reactions: true
+  edit-messages: true
+  delete-messages: true
+  schedule-messages: false
+  notes:
+    - "Full messaging via Pidgin/Finch"
+    - "Edit/delete support"
+    - "Thread replies supported"
+
+attachment-handling:
+  upload-files: true
+  download-files: true
+  upload-from-stdin: false
+  upload-images: true
+  upload-audio: false
+  upload-video: false
+  upload-documents: true
+  download-all-files: false
+  file-type-filtering: false
+  notes:
+    - "File transfer via Pidgin UI"
+    - "Image/document support"
+
+export-capabilities:
+  full-workspace-export: false
+  channel-export: false
+  dm-export: false
+  thread-export: false
+  include-attachments: false
+  incremental-export: false
+  date-range-export: false
+  notes:
+    - "No export capabilities"
+    - "Pidgin may have logging features"
+
+mcp-integration:
+  is-mcp-server: false
+
 notes:
   - "Enables Slack in existing Pidgin/Finch/Bitlbee workflows"
   - "Useful for multi-protocol IM consolidation"
@@ -94,3 +169,5 @@ warnings:
   - "Requires source compilation on Linux/macOS"
   - "Maintainer (@dylex) has limited availability"
   - "Browser tokens may have different access scopes"
+  - "NOT scriptable - GUI/TUI plugin only"
+  - "Not suitable for AI/automation"

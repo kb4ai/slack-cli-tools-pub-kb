@@ -1,4 +1,4 @@
-last-update: "2025-12-23"
+last-update: "2025-12-24"
 repo-url: "https://github.com/rockymadden/slack-cli"
 
 name: "slack-cli"
@@ -86,15 +86,93 @@ ai-friendly:
     - "Pure Bash makes it very easy to script"
     - "No structured output limits AI parsing"
 
+# NEW DETAILED SECTIONS
+
+read-capabilities:
+  read-messages: false
+  read-channels: true
+  read-dms: false
+  read-group-dms: false
+  read-threads: false
+  message-search: false
+  user-info: true
+  export-history: false
+  notes:
+    - "CANNOT read message history"
+    - "Only channel listing and user info"
+    - "18 commands but none for reading messages"
+
+query-options:
+  date-range-filter: false
+  limit-results: false
+  pagination: false
+  channel-filter: false
+  user-filter: false
+  keyword-search: false
+  thread-filter: false
+  include-replies: false
+  notes:
+    - "No query capabilities"
+
+communication-features:
+  reply-to-thread: false
+  reply-with-broadcast: false
+  start-new-thread: false
+  send-to-dm: true
+  send-to-channel: true
+  send-to-group-dm: false
+  message-formatting: true
+  emoji-reactions: false
+  edit-messages: false
+  delete-messages: false
+  schedule-messages: false
+  notes:
+    - "Can send to channels and DMs"
+    - "No thread support"
+    - "Rich message formatting (attachments JSON)"
+
+attachment-handling:
+  upload-files: true
+  download-files: false
+  upload-from-stdin: true
+  upload-images: true
+  upload-audio: true
+  upload-video: true
+  upload-documents: true
+  download-all-files: false
+  file-type-filtering: false
+  notes:
+    - "File upload supported"
+    - "Can pipe from stdin"
+    - "No download capability"
+
+export-capabilities:
+  full-workspace-export: false
+  channel-export: false
+  dm-export: false
+  thread-export: false
+  include-attachments: false
+  incremental-export: false
+  date-range-export: false
+  notes:
+    - "No export capabilities"
+
+mcp-integration:
+  is-mcp-server: false
+
 notes:
   - "Pioneering early Slack CLI tool"
   - "Very popular historically (~1100 stars)"
   - "Zero dependencies - pure Bash implementation"
   - "Issue #118 (March 2021): 'Is this project maintained anymore'"
   - "Last significant update circa 2015-2018"
+  - "18 commands available but NO reading capabilities"
+  - "Good jq integration for JSON processing"
 
 warnings:
-  - "UNMAINTAINED - last commit ~2015"
+  - "UNMAINTAINED - last commit 2018"
   - "Legacy token authentication likely broken"
   - "Slack API deprecations may cause failures"
   - "Not recommended for new deployments"
+  - "CANNOT READ MESSAGES - send-only tool"
+  - "No thread support"

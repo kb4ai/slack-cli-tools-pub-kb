@@ -397,6 +397,256 @@ def generate_installation_table(projects: list) -> str:
     return '\n'.join(lines)
 
 
+def generate_read_capabilities_table(projects: list) -> str:
+    """Generate read capabilities comparison matrix."""
+    lines = []
+    lines.append("## Read Capabilities\n")
+
+    capabilities = ['read-messages', 'read-channels', 'read-dms', 'read-group-dms',
+                   'read-threads', 'message-search', 'user-info', 'export-history']
+
+    # Header
+    header = "| Tool |"
+    for c in capabilities:
+        header += f" {c.replace('-', ' ').title()} |"
+    lines.append(header)
+
+    separator = "|------|" + "------|" * len(capabilities)
+    lines.append(separator)
+
+    for p in sorted(projects, key=lambda p: p.get('stars') or 0, reverse=True):
+        name = p.get('name', 'Unknown')
+        url = p.get('repo-url', '#')
+        row = f"| [{name}]({url}) |"
+
+        read_caps = p.get('read-capabilities', {}) or {}
+        for c in capabilities:
+            value = read_caps.get(c)
+            if value is True:
+                row += " ✓ |"
+            elif value is False:
+                row += " ✗ |"
+            else:
+                row += " - |"
+
+        lines.append(row)
+
+    return '\n'.join(lines)
+
+
+def generate_query_options_table(projects: list) -> str:
+    """Generate query options comparison matrix."""
+    lines = []
+    lines.append("## Query Options\n")
+
+    options = ['date-range-filter', 'limit-results', 'pagination', 'channel-filter',
+              'user-filter', 'keyword-search', 'thread-filter']
+
+    # Header
+    header = "| Tool |"
+    for o in options:
+        header += f" {o.replace('-', ' ').title()} |"
+    lines.append(header)
+
+    separator = "|------|" + "------|" * len(options)
+    lines.append(separator)
+
+    for p in sorted(projects, key=lambda p: p.get('stars') or 0, reverse=True):
+        name = p.get('name', 'Unknown')
+        url = p.get('repo-url', '#')
+        row = f"| [{name}]({url}) |"
+
+        query_opts = p.get('query-options', {}) or {}
+        for o in options:
+            value = query_opts.get(o)
+            if value is True:
+                row += " ✓ |"
+            elif value is False:
+                row += " ✗ |"
+            else:
+                row += " - |"
+
+        lines.append(row)
+
+    return '\n'.join(lines)
+
+
+def generate_communication_features_table(projects: list) -> str:
+    """Generate communication features comparison matrix."""
+    lines = []
+    lines.append("## Communication Features\n")
+
+    features = ['reply-to-thread', 'reply-with-broadcast', 'start-new-thread',
+               'send-to-dm', 'send-to-channel', 'send-to-group-dm', 'message-formatting']
+
+    # Header
+    header = "| Tool |"
+    for f in features:
+        header += f" {f.replace('-', ' ').title()} |"
+    lines.append(header)
+
+    separator = "|------|" + "------|" * len(features)
+    lines.append(separator)
+
+    for p in sorted(projects, key=lambda p: p.get('stars') or 0, reverse=True):
+        name = p.get('name', 'Unknown')
+        url = p.get('repo-url', '#')
+        row = f"| [{name}]({url}) |"
+
+        comm_features = p.get('communication-features', {}) or {}
+        for f in features:
+            value = comm_features.get(f)
+            if value is True:
+                row += " ✓ |"
+            elif value is False:
+                row += " ✗ |"
+            else:
+                row += " - |"
+
+        lines.append(row)
+
+    return '\n'.join(lines)
+
+
+def generate_attachment_handling_table(projects: list) -> str:
+    """Generate attachment handling comparison matrix."""
+    lines = []
+    lines.append("## Attachment Handling\n")
+
+    features = ['upload-files', 'download-files', 'upload-from-stdin',
+               'upload-images', 'upload-audio', 'upload-video']
+
+    # Header
+    header = "| Tool |"
+    for f in features:
+        header += f" {f.replace('-', ' ').title()} |"
+    lines.append(header)
+
+    separator = "|------|" + "------|" * len(features)
+    lines.append(separator)
+
+    for p in sorted(projects, key=lambda p: p.get('stars') or 0, reverse=True):
+        name = p.get('name', 'Unknown')
+        url = p.get('repo-url', '#')
+        row = f"| [{name}]({url}) |"
+
+        attachment = p.get('attachment-handling', {}) or {}
+        for f in features:
+            value = attachment.get(f)
+            if value is True:
+                row += " ✓ |"
+            elif value is False:
+                row += " ✗ |"
+            else:
+                row += " - |"
+
+        lines.append(row)
+
+    return '\n'.join(lines)
+
+
+def generate_export_capabilities_table(projects: list) -> str:
+    """Generate export capabilities comparison matrix."""
+    lines = []
+    lines.append("## Export Capabilities\n")
+
+    features = ['full-workspace-export', 'channel-export', 'dm-export',
+               'thread-export', 'include-attachments']
+
+    # Header
+    header = "| Tool |"
+    for f in features:
+        header += f" {f.replace('-', ' ').title()} |"
+    lines.append(header)
+
+    separator = "|------|" + "------|" * len(features)
+    lines.append(separator)
+
+    for p in sorted(projects, key=lambda p: p.get('stars') or 0, reverse=True):
+        name = p.get('name', 'Unknown')
+        url = p.get('repo-url', '#')
+        row = f"| [{name}]({url}) |"
+
+        export_caps = p.get('export-capabilities', {}) or {}
+        for f in features:
+            value = export_caps.get(f)
+            if value is True:
+                row += " ✓ |"
+            elif value is False:
+                row += " ✗ |"
+            else:
+                row += " - |"
+
+        lines.append(row)
+
+    return '\n'.join(lines)
+
+
+def generate_mcp_integration_table(projects: list) -> str:
+    """Generate MCP integration comparison matrix."""
+    lines = []
+    lines.append("## MCP Integration\n")
+
+    features = ['is-mcp-server', 'stealth-mode', 'rate-limit-handling',
+               'supports-enterprise']
+
+    # Header
+    header = "| Tool |"
+    for f in features:
+        header += f" {f.replace('-', ' ').title()} |"
+    lines.append(header)
+
+    separator = "|------|" + "------|" * len(features)
+    lines.append(separator)
+
+    for p in sorted(projects, key=lambda p: p.get('stars') or 0, reverse=True):
+        name = p.get('name', 'Unknown')
+        url = p.get('repo-url', '#')
+        row = f"| [{name}]({url}) |"
+
+        mcp = p.get('mcp-integration', {}) or {}
+        for f in features:
+            value = mcp.get(f)
+            if value is True:
+                row += " ✓ |"
+            elif value is False:
+                row += " ✗ |"
+            else:
+                row += " - |"
+
+        lines.append(row)
+
+    # Add MCP tools/resources info
+    lines.append("\n### MCP Tools and Resources\n")
+    for p in sorted(projects, key=lambda p: p.get('stars') or 0, reverse=True):
+        mcp = p.get('mcp-integration', {}) or {}
+        if mcp.get('is-mcp-server'):
+            name = p.get('name', 'Unknown')
+            lines.append(f"**{name}:**")
+
+            tools = mcp.get('mcp-tools', [])
+            if tools:
+                lines.append("- Tools:")
+                for tool in tools:
+                    lines.append(f"  - {tool}")
+
+            resources = mcp.get('mcp-resources', [])
+            if resources:
+                lines.append("- Resources:")
+                for resource in resources:
+                    lines.append(f"  - {resource}")
+
+            notes = mcp.get('notes', [])
+            if notes:
+                lines.append("- Notes:")
+                for note in notes:
+                    lines.append(f"  - {note}")
+
+            lines.append("")
+
+    return '\n'.join(lines)
+
+
 def generate_statistics(projects: list) -> str:
     """Generate summary statistics."""
     lines = []
@@ -468,6 +718,18 @@ def generate_full_report(projects: list) -> str:
     lines.append("")
     lines.append(generate_feature_matrix(projects))
     lines.append("")
+    lines.append(generate_read_capabilities_table(projects))
+    lines.append("")
+    lines.append(generate_query_options_table(projects))
+    lines.append("")
+    lines.append(generate_communication_features_table(projects))
+    lines.append("")
+    lines.append(generate_attachment_handling_table(projects))
+    lines.append("")
+    lines.append(generate_export_capabilities_table(projects))
+    lines.append("")
+    lines.append(generate_mcp_integration_table(projects))
+    lines.append("")
     lines.append(generate_auth_matrix(projects))
     lines.append("")
     lines.append(generate_ai_friendly_table(projects))
@@ -492,6 +754,12 @@ def main():
     parser.add_argument('--by-maintenance', action='store_true', help='Group by maintenance status')
     parser.add_argument('--by-stars', action='store_true', help='Sort by GitHub stars')
     parser.add_argument('--features', action='store_true', help='Feature matrix only')
+    parser.add_argument('--read-capabilities', action='store_true', help='Read capabilities matrix')
+    parser.add_argument('--query-options', action='store_true', help='Query options matrix')
+    parser.add_argument('--communication-features', action='store_true', help='Communication features matrix')
+    parser.add_argument('--attachment-handling', action='store_true', help='Attachment handling matrix')
+    parser.add_argument('--export-capabilities', action='store_true', help='Export capabilities matrix')
+    parser.add_argument('--mcp-integration', action='store_true', help='MCP integration matrix')
     parser.add_argument('--auth', action='store_true', help='Authentication matrix only')
     parser.add_argument('--ai-friendly', action='store_true', help='AI friendliness matrix')
     parser.add_argument('--output-formats', action='store_true', help='Output formats matrix')
@@ -531,6 +799,18 @@ def main():
         output = generate_overview_table(projects)
     elif args.features:
         output = generate_feature_matrix(projects)
+    elif args.read_capabilities:
+        output = generate_read_capabilities_table(projects)
+    elif args.query_options:
+        output = generate_query_options_table(projects)
+    elif args.communication_features:
+        output = generate_communication_features_table(projects)
+    elif args.attachment_handling:
+        output = generate_attachment_handling_table(projects)
+    elif args.export_capabilities:
+        output = generate_export_capabilities_table(projects)
+    elif args.mcp_integration:
+        output = generate_mcp_integration_table(projects)
     elif args.auth:
         output = generate_auth_matrix(projects)
     elif args.ai_friendly:

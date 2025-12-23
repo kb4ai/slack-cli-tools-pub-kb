@@ -1,4 +1,4 @@
-last-update: "2025-12-23"
+last-update: "2025-12-24"
 repo-url: "https://github.com/jpbruinsslot/slack-term"
 
 name: "slack-term"
@@ -87,6 +87,78 @@ ai-friendly:
     - "TUI not suitable for AI automation"
     - "Interactive-only interface"
 
+# NEW DETAILED SECTIONS
+
+read-capabilities:
+  read-messages: true
+  read-channels: true
+  read-dms: true
+  read-group-dms: false
+  read-threads: true
+  message-search: true
+  user-info: true
+  export-history: false
+  notes:
+    - "TUI displays messages but no structured export"
+    - "Interactive browsing only - not scriptable"
+    - "Authentication issues limit real-world use"
+
+query-options:
+  date-range-filter: false
+  limit-results: false
+  pagination: false
+  channel-filter: true
+  user-filter: false
+  keyword-search: true
+  thread-filter: false
+  include-replies: true
+  notes:
+    - "Basic channel navigation via TUI"
+    - "Search within TUI interface"
+
+communication-features:
+  reply-to-thread: true
+  reply-with-broadcast: false
+  start-new-thread: false
+  send-to-dm: true
+  send-to-channel: true
+  send-to-group-dm: false
+  message-formatting: true
+  emoji-reactions: false
+  edit-messages: false
+  delete-messages: false
+  schedule-messages: false
+  notes:
+    - "Basic messaging via TUI"
+    - "Thread support via keyboard shortcuts"
+
+attachment-handling:
+  upload-files: false
+  download-files: false
+  upload-from-stdin: false
+  upload-images: false
+  upload-audio: false
+  upload-video: false
+  upload-documents: false
+  download-all-files: false
+  file-type-filtering: false
+  notes:
+    - "No file handling support"
+
+export-capabilities:
+  full-workspace-export: false
+  channel-export: false
+  dm-export: false
+  thread-export: false
+  include-attachments: false
+  incremental-export: false
+  date-range-export: false
+  notes:
+    - "TUI only - no export capabilities"
+
+mcp-integration:
+  is-mcp-server: false
+
 notes:
   - "Originally erroneousboat/slack-term, transferred to jpbruinsslot"
   - "77.9% issue resolution rate (183 closed vs 52 open)"
@@ -100,3 +172,5 @@ warnings:
   - "Issue #284: Token Method 1 no longer works (reported 2024)"
   - "Requires manual browser token extraction with admin approval"
   - "No maintainer response to recent authentication issues"
+  - "NOT SUITABLE for AI/automation - TUI only"
+  - "No JSON output - cannot pipe to jq/yq"

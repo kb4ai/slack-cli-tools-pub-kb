@@ -1,4 +1,4 @@
-last-update: "2025-12-23"
+last-update: "2025-12-24"
 repo-url: "https://github.com/shaharia-lab/slackcli"
 
 name: "slackcli"
@@ -92,6 +92,91 @@ ai-friendly:
     - "JSON output enables automation workflows"
     - "TypeScript/Bun aligns with Node.js AI ecosystems"
 
+# NEW DETAILED SECTIONS
+
+read-capabilities:
+  read-messages: true
+  read-channels: true
+  read-dms: true
+  read-group-dms: true
+  read-threads: true
+  message-search: true
+  user-info: true
+  export-history: false
+  api-methods:
+    - "conversations.history"
+    - "conversations.list"
+    - "conversations.replies"
+    - "search.messages"
+    - "users.list"
+  notes:
+    - "BEST CLI for reading Slack with JSON output"
+    - "Full thread support with timestamp extraction"
+    - "Designed for AI agent integration"
+
+query-options:
+  date-range-filter: true
+  limit-results: true
+  pagination: true
+  channel-filter: true
+  user-filter: false
+  keyword-search: true
+  thread-filter: true
+  include-replies: true
+  notes:
+    - "Full query options via CLI flags"
+    - "Supports oldest/latest timestamps"
+    - "Cursor-based pagination"
+
+communication-features:
+  reply-to-thread: true
+  reply-with-broadcast: true
+  start-new-thread: true
+  send-to-dm: true
+  send-to-channel: true
+  send-to-group-dm: true
+  message-formatting: true
+  emoji-reactions: false
+  edit-messages: false
+  delete-messages: false
+  schedule-messages: false
+  notes:
+    - "Full bidirectional communication"
+    - "Thread replies with broadcast option"
+    - "Designed for conversational AI workflows"
+
+attachment-handling:
+  upload-files: false
+  download-files: false
+  upload-from-stdin: false
+  upload-images: false
+  upload-audio: false
+  upload-video: false
+  upload-documents: false
+  download-all-files: false
+  file-type-filtering: false
+  notes:
+    - "No file handling yet"
+    - "Focus is on text-based communication"
+
+export-capabilities:
+  full-workspace-export: false
+  channel-export: false
+  dm-export: false
+  thread-export: false
+  include-attachments: false
+  incremental-export: false
+  date-range-export: false
+  notes:
+    - "Not designed for bulk export"
+    - "Use rusq/slackdump for export needs"
+
+mcp-integration:
+  is-mcp-server: false
+  notes:
+    - "Could be wrapped in MCP server"
+    - "JSON output makes it MCP-compatible"
+
 notes:
   - "Created November 2025 (very new project)"
   - "Part of Shaharia Lab's open-source portfolio"
@@ -100,6 +185,8 @@ notes:
   - "JSON output via --json flag for AI parsing"
   - "Thread-aware conversation reading with timestamp extraction"
   - "No terminal image display support"
+  - "BEST TOOL for AI/automation with JSON output"
+  - "ONLY CLI with full read + write + thread support"
 
 warnings:
   - "Very new project (< 2 months old)"
@@ -107,3 +194,4 @@ warnings:
   - "Table/CSV output mentioned but NOT yet implemented"
   - "Requires Bun runtime installation"
   - "Limited community engagement (5 stars)"
+  - "No file/attachment support yet"

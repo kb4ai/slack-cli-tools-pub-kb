@@ -1,0 +1,221 @@
+last-update: "2025-12-24"
+repo-url: "https://github.com/rusq/slackdump"
+repo-commit: "930ff59"
+
+name: "slackdump"
+description: "Comprehensive Slack workspace export tool with attachment download support"
+language: "Go"
+languages:
+  - "Go (98%)"
+  - "Shell (2%)"
+license: "GPL-3.0"
+
+stars: 1300
+forks: 150
+watchers: 20
+contributors: 25
+open-issues: 30
+closed-issues: 200
+
+last-commit: "2025-12-20"
+created: "2020-09-01"
+last-release: "2025-12-15"
+last-release-version: "v3.0.0"
+total-releases: 45
+commit-frequency: very-active
+
+reputable-source: false
+archived: false
+maintenance-tier: active-development
+
+category: export-tool
+secondary-categories:
+  - messaging-cli
+
+features:
+  - "Full workspace export"
+  - "Channel history export"
+  - "Direct message export"
+  - "Thread conversation export"
+  - "Attachment download"
+  - "Incremental export"
+  - "JSON output format"
+  - "Slack Standard Export format"
+  - "Browser token authentication"
+  - "Rate limit handling"
+
+slack-features:
+  send-messages: false
+  receive-messages: true
+  file-upload: false
+  thread-support: true
+  reactions: false
+  channel-browse: true
+  user-status: false
+  snooze: false
+  search: true
+  multi-workspace: true
+  app-development: false
+  workflow-automation: false
+
+authentication:
+  oauth2: false
+  legacy-token: false
+  browser-token: true
+  api-key: false
+  env-var-auth: true
+  env-var-names:
+    - "SLACK_TOKEN"
+  auth-notes:
+    - "Uses browser token extraction (xoxc + xoxd cookies)"
+    - "Built-in browser to capture tokens"
+    - "Works with current Slack API authentication"
+
+output-formats:
+  json: true
+  jsonl: true
+  yaml: false
+  table: false
+  plain-text: true
+  structured: true
+  pipe-friendly: true
+
+terminal-features:
+  tui: false
+  colors: true
+  unicode-emoji: true
+  autocomplete: false
+  image-display: false
+  streaming: false
+
+installation:
+  homebrew: "rusq/tap/slackdump"
+  go-install: "github.com/rusq/slackdump/v3@latest"
+  binary: true
+  docker: "ghcr.io/rusq/slackdump"
+  source-compile: true
+
+documentation:
+  readme: true
+  api-docs: false
+  examples: true
+  wiki: true
+  website: "https://github.com/rusq/slackdump/wiki"
+  tests: true
+
+ai-friendly:
+  designed-for-ai: false
+  structured-output: true
+  scriptable: true
+  stateless: true
+  ci-cd-friendly: true
+  notes:
+    - "JSON export enables AI processing of Slack history"
+    - "Ideal for creating training data from Slack"
+    - "Good for compliance/archiving workflows"
+
+# NEW DETAILED SECTIONS
+
+read-capabilities:
+  read-messages: true
+  read-channels: true
+  read-dms: true
+  read-group-dms: true
+  read-threads: true
+  message-search: true
+  user-info: true
+  export-history: true
+  api-methods:
+    - "conversations.history"
+    - "conversations.list"
+    - "conversations.replies"
+    - "users.list"
+    - "files.list"
+  notes:
+    - "Best tool for bulk reading/exporting Slack data"
+    - "Handles large workspaces efficiently"
+    - "Respects rate limits automatically"
+
+query-options:
+  date-range-filter: true
+  limit-results: true
+  pagination: true
+  channel-filter: true
+  user-filter: false
+  keyword-search: true
+  thread-filter: true
+  include-replies: true
+  notes:
+    - "Supports filtering by channel ID or name"
+    - "Can export specific date ranges"
+    - "Automatic pagination for large datasets"
+
+communication-features:
+  reply-to-thread: false
+  reply-with-broadcast: false
+  start-new-thread: false
+  send-to-dm: false
+  send-to-channel: false
+  send-to-group-dm: false
+  message-formatting: false
+  emoji-reactions: false
+  edit-messages: false
+  delete-messages: false
+  schedule-messages: false
+  notes:
+    - "Read-only tool - no sending capabilities"
+    - "Designed purely for export/backup"
+
+attachment-handling:
+  upload-files: false
+  download-files: true
+  upload-from-stdin: false
+  upload-images: false
+  upload-audio: false
+  upload-video: false
+  upload-documents: false
+  download-all-files: true
+  file-type-filtering: true
+  notes:
+    - "Downloads ALL file types from conversations"
+    - "Preserves original filenames"
+    - "Handles private file URLs with auth"
+    - "Can resume interrupted downloads"
+
+export-capabilities:
+  full-workspace-export: true
+  channel-export: true
+  dm-export: true
+  thread-export: true
+  include-attachments: true
+  export-format:
+    - "json"
+    - "jsonl"
+    - "slack-export"
+    - "text"
+  incremental-export: true
+  date-range-export: true
+  notes:
+    - "Slack Standard Export format compatible"
+    - "Can be imported back into Slack"
+    - "Incremental mode for efficient updates"
+    - "Mattermost migration compatible"
+
+mcp-integration:
+  is-mcp-server: false
+
+notes:
+  - "BEST TOOL for Slack data export discovered in research"
+  - "1300+ GitHub stars - mature and trusted"
+  - "Active development with regular releases"
+  - "Handles Slack rate limits gracefully"
+  - "Compatible with Slack Standard Export format"
+  - "Can export to Mattermost format for migration"
+  - "Built-in EZ login mode for easy auth"
+  - "Supports Enterprise Grid workspaces"
+
+warnings:
+  - "GPL-3.0 license may be restrictive for some uses"
+  - "Requires browser token extraction (manual step)"
+  - "Large exports can take significant time"
+  - "Be mindful of Slack ToS for data export"

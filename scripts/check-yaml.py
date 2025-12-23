@@ -43,7 +43,8 @@ VALID_LANGUAGES = [
 
 VALID_CATEGORIES = [
     'official-cli', 'messaging-cli', 'terminal-ui', 'file-upload',
-    'notification-tool', 'libpurple-plugin', 'bot-framework', 'api-wrapper'
+    'notification-tool', 'libpurple-plugin', 'bot-framework', 'api-wrapper',
+    'export-tool', 'mcp-server'
 ]
 
 VALID_MAINTENANCE_TIERS = [

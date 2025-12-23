@@ -1,4 +1,4 @@
-last-update: "2025-12-23"
+last-update: "2025-12-24"
 repo-url: "https://github.com/bcicen/slackcat"
 
 name: "slackcat"
@@ -91,6 +91,79 @@ ai-friendly:
     - "Streaming mode ideal for monitoring"
     - "Single-binary Go distribution simplifies container packaging"
 
+# NEW DETAILED SECTIONS
+
+read-capabilities:
+  read-messages: false
+  read-channels: false
+  read-dms: false
+  read-group-dms: false
+  read-threads: false
+  message-search: false
+  user-info: false
+  export-history: false
+  notes:
+    - "SEND-ONLY tool - cannot read messages"
+    - "No query capabilities"
+
+query-options:
+  date-range-filter: false
+  limit-results: false
+  pagination: false
+  channel-filter: false
+  user-filter: false
+  keyword-search: false
+  thread-filter: false
+  include-replies: false
+  notes:
+    - "No query capabilities - send only"
+
+communication-features:
+  reply-to-thread: true
+  reply-with-broadcast: false
+  start-new-thread: false
+  send-to-dm: false
+  send-to-channel: true
+  send-to-group-dm: false
+  message-formatting: true
+  emoji-reactions: false
+  edit-messages: false
+  delete-messages: false
+  schedule-messages: false
+  notes:
+    - "Can reply to threads via --thread flag"
+    - "Primary use is sending logs/files to channels"
+
+attachment-handling:
+  upload-files: true
+  download-files: false
+  upload-from-stdin: true
+  upload-images: true
+  upload-audio: true
+  upload-video: true
+  upload-documents: true
+  download-all-files: false
+  file-type-filtering: false
+  notes:
+    - "EXCELLENT for file uploads from CLI"
+    - "Supports streaming via stdin (tail -f)"
+    - "Creates snippets for code/logs"
+    - "Any file type supported"
+
+export-capabilities:
+  full-workspace-export: false
+  channel-export: false
+  dm-export: false
+  thread-export: false
+  include-attachments: false
+  incremental-export: false
+  date-range-export: false
+  notes:
+    - "No export capabilities - upload only"
+
+mcp-integration:
+  is-mcp-server: false
+
 notes:
   - "Purpose-built for log streaming"
   - "Stable 1.7.x series with releases through 2024"
@@ -99,7 +172,9 @@ notes:
   - "MIT license permits enterprise adoption"
   - "Streaming mode introduced in v0.8 (2016-01-11)"
   - "No terminal image display - focuses on file uploads to Slack"
+  - "BEST TOOL for file uploads and log streaming"
 
 warnings:
   - "Last code commit July 2021 (but releases continued through 2024)"
   - "Narrow scope - primarily for file/log uploads"
+  - "Cannot read messages - send-only tool"

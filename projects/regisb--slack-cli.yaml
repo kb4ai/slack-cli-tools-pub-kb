@@ -1,4 +1,4 @@
-last-update: "2025-12-23"
+last-update: "2025-12-24"
 repo-url: "https://github.com/regisb/slack-cli"
 
 name: "slack-cli"
@@ -86,15 +86,99 @@ ai-friendly:
     - "Good for scripting in Python environments"
     - "Stdin piping enables automation"
 
+# NEW DETAILED SECTIONS
+
+read-capabilities:
+  read-messages: true
+  read-channels: true
+  read-dms: true
+  read-group-dms: false
+  read-threads: false
+  message-search: false
+  user-info: true
+  export-history: false
+  api-methods:
+    - "rtm.connect"
+    - "conversations.list"
+    - "channels.history"
+  notes:
+    - "Uses RTM WebSocket streaming (deprecated API)"
+    - "NO thread support (thread_ts not handled)"
+    - "Can read messages but no JSON export"
+
+query-options:
+  date-range-filter: false
+  limit-results: false
+  pagination: false
+  channel-filter: true
+  user-filter: false
+  keyword-search: false
+  thread-filter: false
+  include-replies: false
+  notes:
+    - "Basic channel selection only"
+    - "No date filtering or pagination"
+
+communication-features:
+  reply-to-thread: false
+  reply-with-broadcast: false
+  start-new-thread: false
+  send-to-dm: true
+  send-to-channel: true
+  send-to-group-dm: false
+  message-formatting: true
+  emoji-reactions: false
+  edit-messages: false
+  delete-messages: false
+  schedule-messages: false
+  notes:
+    - "NO THREAD SUPPORT - major limitation"
+    - "Can send to channels and DMs"
+    - "Supports emoji rendering (Unicode)"
+
+attachment-handling:
+  upload-files: false
+  download-files: false
+  upload-from-stdin: true
+  upload-images: false
+  upload-audio: false
+  upload-video: false
+  upload-documents: false
+  download-all-files: false
+  file-type-filtering: false
+  notes:
+    - "Can pipe text from stdin"
+    - "No file upload/download support"
+
+export-capabilities:
+  full-workspace-export: false
+  channel-export: false
+  dm-export: false
+  thread-export: false
+  include-attachments: false
+  incremental-export: false
+  date-range-export: false
+  notes:
+    - "No export capabilities"
+    - "Streaming only - no bulk export"
+
+mcp-integration:
+  is-mcp-server: false
+
 notes:
   - "Explicit maintenance mode declaration in README"
   - "Maintainer open to transferring ownership"
   - "Last commit December 15, 2020"
   - "PyPI package: slack-cli (v2.0.1)"
   - "14.1% fork ratio suggests active experimentation prior to maintenance mode"
+  - "Uses RTM WebSocket API (deprecated by Slack)"
+  - "NO JSON OUTPUT - cannot pipe to jq/yq"
 
 warnings:
   - "IN MAINTENANCE MODE - security fixes only"
   - "No new features planned"
   - "May have compatibility issues with evolving Slack authentication"
   - "Maintainer seeking new maintainer"
+  - "NO THREAD SUPPORT - cannot read or reply to threads"
+  - "NO JSON OUTPUT - not suitable for AI/automation"
+  - "Uses deprecated RTM API"

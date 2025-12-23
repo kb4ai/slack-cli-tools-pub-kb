@@ -1,0 +1,102 @@
+last-update: "2025-12-23"
+repo-url: "https://github.com/jpbruinsslot/slack-term"
+
+name: "slack-term"
+description: "Full-featured terminal UI for Slack with channel browsing and real-time updates"
+language: "Go"
+license: "MIT"
+
+stars: 6557
+forks: 222
+open-issues: 68
+closed-issues: 183
+watchers: 70
+contributors: 6
+
+last-commit: "2020-05-05"
+created: "2016-09-11"
+last-release: "2020-03-14"
+last-release-version: "v0.5.0"
+total-releases: 12
+commit-frequency: stale
+
+reputable-source: false
+archived: false
+maintenance-tier: unmaintained
+
+category: terminal-ui
+
+features:
+  - "Full terminal user interface"
+  - "Channel browsing"
+  - "Message threading"
+  - "Real-time updates"
+  - "ncurses-style interface"
+  - "User list display"
+  - "Message search"
+
+slack-features:
+  send-messages: true
+  receive-messages: true
+  channel-browse: true
+  thread-support: true
+  search: true
+  multi-workspace: false
+  file-upload: false
+  reactions: false
+
+authentication:
+  oauth2: false  # Partial
+  legacy-token: true
+  browser-token: true
+  env-var-auth: true
+  auth-notes:
+    - "Issue #284: 'Token Method 1 no longer works'"
+    - "Manual browser token extraction required for newer workspaces"
+    - "Extract xoxc- from LocalStorage and xoxd- from Cookie"
+
+output-formats:
+  plain-text: true
+  # TUI focused, not for scripting
+
+terminal-features:
+  tui: true
+  colors: true
+  unicode-emoji: true
+  streaming: true
+  image-display: false
+  image-protocols: []
+
+installation:
+  snap: "slack-term"
+  binary: true
+  go-install: "github.com/jpbruinsslot/slack-term"
+  aur: "slack-term"
+  source-compile: true
+
+documentation:
+  readme: true
+  wiki: true
+  examples: true
+  tests: false
+
+ai-friendly:
+  designed-for-ai: false
+  scriptable: false
+  notes:
+    - "TUI not suitable for AI automation"
+    - "Interactive-only interface"
+
+notes:
+  - "Originally erroneousboat/slack-term, transferred to jpbruinsslot"
+  - "77.9% issue resolution rate (183 closed vs 52 open)"
+  - "Popular choice for terminal enthusiasts"
+  - "Authentication complexity has increased over time"
+  - "Effective for text-focused workflows"
+
+warnings:
+  - "EFFECTIVELY ABANDONED - last commit May 2020 (5+ years ago)"
+  - "Authentication broken - legacy tokens deprecated same day as last commit"
+  - "Issue #284: Token Method 1 no longer works (reported 2024)"
+  - "Requires manual browser token extraction with admin approval"
+  - "No maintainer response to recent authentication issues"

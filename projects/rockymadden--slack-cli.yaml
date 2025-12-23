@@ -1,0 +1,100 @@
+last-update: "2025-12-23"
+repo-url: "https://github.com/rockymadden/slack-cli"
+
+name: "slack-cli"
+description: "Pure Bash CLI for Slack with pipe-friendly design and rich messaging"
+language: "Bash"
+license: "MIT"
+
+terminal-features:
+  tui: false
+  colors: false
+  streaming: false
+  image-display: false
+  image-protocols: []
+
+stars: 1107
+forks: 93
+open-issues: 39
+closed-issues: 19
+watchers: 19
+contributors: 9
+
+last-commit: "2018-11-06"
+created: "2015-12-02"
+commit-frequency: abandoned
+
+reputable-source: false
+archived: false
+maintenance-tier: unmaintained
+
+category: messaging-cli
+
+features:
+  - "Post messages to channels"
+  - "File uploads"
+  - "Status editing"
+  - "Snooze management"
+  - "Rich message formatting"
+  - "Pipe-friendly design"
+  - "No external dependencies"
+
+slack-features:
+  send-messages: true
+  file-upload: true
+  user-status: true
+  snooze: true
+  receive-messages: false
+  thread-support: false
+  channel-browse: true
+
+authentication:
+  oauth2: false
+  legacy-token: true
+  browser-token: false
+  env-var-auth: true
+  env-var-names:
+    - "SLACK_CLI_TOKEN"
+  auth-notes:
+    - "Relies on legacy tokens (deprecated by Slack in 2020)"
+    - "Likely incompatible with current Slack API"
+
+output-formats:
+  json: false
+  plain-text: true
+  pipe-friendly: true
+
+terminal-features:
+  tui: false
+  colors: false
+  streaming: false
+
+installation:
+  homebrew: "rockymadden/rockymadden/slack-cli"
+  binary: true
+  source-compile: false
+
+documentation:
+  readme: true
+  examples: true
+  tests: false
+
+ai-friendly:
+  scriptable: true
+  stateless: true
+  notes:
+    - "Pure Bash makes it very easy to script"
+    - "No structured output limits AI parsing"
+
+notes:
+  - "Pioneering early Slack CLI tool"
+  - "Very popular historically (~1100 stars)"
+  - "Zero dependencies - pure Bash implementation"
+  - "Issue #118 (March 2021): 'Is this project maintained anymore'"
+  - "Last significant update circa 2015-2018"
+
+warnings:
+  - "UNMAINTAINED - last commit ~2015"
+  - "Legacy token authentication likely broken"
+  - "Slack API deprecations may cause failures"
+  - "Not recommended for new deployments"

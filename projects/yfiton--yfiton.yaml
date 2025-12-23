@@ -1,0 +1,87 @@
+last-update: "2025-12-23"
+repo-url: "https://github.com/yfiton/yfiton"
+
+name: "yfiton"
+description: "Cross-platform notification utility supporting Slack, email, Pushbullet, Twitter"
+language: "Java"
+license: "Apache-2.0"
+
+stars: 147
+forks: 14
+watchers: 7
+contributors: 1
+open-issues: 4
+closed-issues: 1
+
+last-commit: "2017-05-11"
+created: "2016-01-01"
+last-release: "2017-05-11"
+last-release-version: "v1.0.0-alpha.3"
+commit-frequency: abandoned
+
+reputable-source: false
+archived: false
+maintenance-tier: unmaintained
+
+category: notification-tool
+
+features:
+  - "Multi-service notifications (7 services)"
+  - "Slack channel messaging"
+  - "Email notifications (SMTP)"
+  - "Pushbullet integration"
+  - "Twitter integration"
+  - "Facebook integration"
+  - "Desktop alerts (Beep)"
+  - "Rich notification parameters"
+
+slack-features:
+  send-messages: true
+  file-upload: false
+  receive-messages: false
+  multi-workspace: false
+
+authentication:
+  oauth2: true
+  api-key: true
+  auth-notes:
+    - "Each service has its own auth configuration"
+    - "Slack integration via -n slack parameter"
+
+output-formats:
+  plain-text: true
+
+terminal-features:
+  tui: false
+  colors: false
+
+installation:
+  binary: true
+  source-compile: true
+
+documentation:
+  readme: true
+  examples: true
+
+ai-friendly:
+  scriptable: true
+  ci-cd-friendly: true
+  notes:
+    - "Useful for unified notification in CI/CD"
+    - "Slack is one of many supported services"
+
+notes:
+  - "Cross-platform notification consolidation"
+  - "Useful for teams with heterogeneous communication platforms"
+  - "Requires Java 13 (sourceCompatibility = 13)"
+  - "Gradle multi-module build system"
+  - "Slack-specific functionality limited compared to dedicated tools"
+  - "Usage: yfiton -n slack -c channel -m message"
+  - "Single contributor (laurentpellegrino)"
+
+warnings:
+  - "ABANDONED - last commit May 2017 (8+ years ago)"
+  - "Limited Slack-specific functionality"
+  - "Requires Java 13 which may not be available everywhere"
+  - "Only alpha release (v1.0.0-alpha.3)"
+  - "Single contributor with no activity"

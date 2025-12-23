@@ -1,0 +1,109 @@
+last-update: "2025-12-23"
+repo-url: "https://github.com/shaharia-lab/slackcli"
+
+name: "slackcli"
+description: "Modern TypeScript CLI for Slack with AI-friendly structured output"
+language: "TypeScript"
+license: "MIT"
+
+stars: 5
+forks: 3
+watchers: 5
+contributors: 1
+open-issues: 2
+closed-issues: 0
+
+last-commit: "2025-12-03"
+created: "2025-11-09"
+last-release: "2025-11-09"
+last-release-version: "v0.1.1"
+total-releases: 2
+commit-frequency: active
+
+reputable-source: false
+organization: "Shaharia Lab"
+archived: false
+maintenance-tier: active-development
+
+category: messaging-cli
+secondary-categories:
+  - bot-framework
+
+features:
+  - "AI-friendly output formats"
+  - "Multi-workspace management"
+  - "Conversational command syntax"
+  - "Browser authentication support"
+  - "Standard OAuth support"
+  - "JSON output"
+  - "Table output"
+  - "Text output"
+
+slack-features:
+  send-messages: true
+  receive-messages: true
+  multi-workspace: true
+  channel-browse: true
+  # Other features TBD
+
+authentication:
+  oauth2: true
+  legacy-token: false
+  browser-token: true
+  env-var-auth: true
+  auth-notes:
+    - "Dual auth: standard OAuth + browser tokens"
+    - "Browser auth bypasses complex OAuth flows"
+
+output-formats:
+  json: true
+  table: false  # Mentioned but not implemented yet
+  plain-text: true
+  structured: true
+  pipe-friendly: true
+
+terminal-features:
+  tui: false
+  colors: true
+  streaming: false
+  image-display: false
+  image-protocols: []
+
+installation:
+  bun: true
+  binary: true
+  npm: "slackcli"  # TBD - verify
+
+documentation:
+  readme: true
+  examples: true
+  website: "https://shaharia.com/blog/slackcli-command-line-tool-slack-automation/"
+  tests: true
+
+ai-friendly:
+  designed-for-ai: true
+  structured-output: true
+  scriptable: true
+  stateless: true
+  ci-cd-friendly: true
+  notes:
+    - "Explicitly designed for AI agents"
+    - "Commands structured for LLM parsing"
+    - "JSON output enables automation workflows"
+    - "TypeScript/Bun aligns with Node.js AI ecosystems"
+
+notes:
+  - "Created November 2025 (very new project)"
+  - "Part of Shaharia Lab's open-source portfolio"
+  - "Requires Bun runtime (>=1.0.0)"
+  - "Single contributor (shahariaazam)"
+  - "JSON output via --json flag for AI parsing"
+  - "Thread-aware conversation reading with timestamp extraction"
+  - "No terminal image display support"
+
+warnings:
+  - "Very new project (< 2 months old)"
+  - "Single contributor (bus factor = 1)"
+  - "Table/CSV output mentioned but NOT yet implemented"
+  - "Requires Bun runtime installation"
+  - "Limited community engagement (5 stars)"

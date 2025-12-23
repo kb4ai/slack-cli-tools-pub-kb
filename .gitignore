@@ -1,0 +1,27 @@
+# Cloned repositories for analysis (volatile, not version controlled)
+tmp/
+
+# IDE/tool configuration
+.claude/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+.idea/
+.vscode/

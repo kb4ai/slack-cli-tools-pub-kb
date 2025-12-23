@@ -1,0 +1,548 @@
+# Slack CLI Tools Comparison - YAML Schema Specification
+# =====================================================
+# This file defines the schema for project YAML files in the projects/ directory.
+# All project files should follow this specification.
+
+schema-version: "1.0"
+description: "Schema for Slack CLI tools comparison repository"
+
+# =============================================================================
+# FIELD DEFINITIONS
+# =============================================================================
+
+fields:
+  # ---------------------------------------------------------------------------
+  # TRACKING (Required) - Always placed first
+  # ---------------------------------------------------------------------------
+  last-update:
+    description: "Date when this YAML file was last updated"
+    type: string
+    format: "YYYY-MM-DD"
+    required: true
+    example: "2025-12-23"
+
+  repo-url:
+    description: "Full URL to the repository"
+    type: string
+    format: URL
+    required: true
+    example: "https://github.com/slackapi/slack-cli"
+
+  repo-commit:
+    description: "Git commit hash at which the repository was analyzed"
+    type: string
+    format: "hex string (7-40 chars)"
+    required: false
+    example: "a1b2c3d"
+
+  # ---------------------------------------------------------------------------
+  # BASIC INFORMATION
+  # ---------------------------------------------------------------------------
+  name:
+    description: "Display name of the tool"
+    type: string
+    required: true
+    example: "slack-cli"
+
+  description:
+    description: "Brief description of what the tool does"
+    type: string
+    required: true
+    example: "Official CLI for building Slack apps"
+
+  language:
+    description: "Primary programming language"
+    type: string
+    required: true
+    enum:
+      - Go
+      - Python
+      - TypeScript
+      - JavaScript
+      - Rust
+      - Bash
+      - PHP
+      - Java
+      - C
+      - Ruby
+      - Other
+
+  languages:
+    description: "All programming languages used (with percentages if known)"
+    type: array
+    required: false
+    example:
+      - "Go (97.6%)"
+      - "Shell (1.3%)"
+
+  license:
+    description: "Software license"
+    type: string
+    required: false
+    example: "Apache-2.0"
+
+  # ---------------------------------------------------------------------------
+  # GITHUB METRICS
+  # ---------------------------------------------------------------------------
+  stars:
+    description: "GitHub star count"
+    type: integer
+    required: false
+
+  forks:
+    description: "GitHub fork count"
+    type: integer
+    required: false
+
+  watchers:
+    description: "GitHub watcher count"
+    type: integer
+    required: false
+
+  contributors:
+    description: "Number of contributors"
+    type: integer
+    required: false
+
+  open-issues:
+    description: "Number of open issues"
+    type: integer
+    required: false
+
+  closed-issues:
+    description: "Number of closed issues"
+    type: integer
+    required: false
+
+  # ---------------------------------------------------------------------------
+  # DATES AND ACTIVITY
+  # ---------------------------------------------------------------------------
+  last-commit:
+    description: "Date of most recent commit"
+    type: string
+    format: "YYYY-MM-DD"
+    required: false
+
+  created:
+    description: "Repository creation date"
+    type: string
+    format: "YYYY-MM-DD"
+    required: false
+
+  last-release:
+    description: "Date of most recent release"
+    type: string
+    format: "YYYY-MM-DD"
+    required: false
+
+  last-release-version:
+    description: "Version string of most recent release"
+    type: string
+    required: false
+    example: "v3.9.0"
+
+  total-releases:
+    description: "Total number of releases"
+    type: integer
+    required: false
+
+  commit-frequency:
+    description: "Approximate commit frequency"
+    type: string
+    required: false
+    enum:
+      - very-active      # Multiple commits per week
+      - active           # Weekly commits
+      - moderate         # Monthly commits
+      - sporadic         # Occasional commits
+      - stale            # No commits in >6 months
+      - abandoned        # No commits in >2 years
+
+  # ---------------------------------------------------------------------------
+  # REPUTATION AND STATUS
+  # ---------------------------------------------------------------------------
+  reputable-source:
+    description: "From a known/official organization"
+    type: boolean
+    required: false
+
+  organization:
+    description: "Organization name if reputable-source is true"
+    type: string
+    required: false
+    example: "Slack/Salesforce"
+
+  archived:
+    description: "Repository is archived/read-only"
+    type: boolean
+    required: false
+
+  maintenance-tier:
+    description: "Current maintenance status"
+    type: string
+    required: false
+    enum:
+      - active-development   # Regular releases, responsive to issues
+      - maintenance-mode     # Security fixes only, declared by maintainer
+      - community-sustained  # Sporadic community contributions
+      - unmaintained         # No response to issues, stale
+      - archived             # Officially archived
+
+  # ---------------------------------------------------------------------------
+  # CATEGORIZATION
+  # ---------------------------------------------------------------------------
+  category:
+    description: "Primary category of the tool"
+    type: string
+    required: true
+    enum:
+      - official-cli        # Official Slack CLI for app development
+      - messaging-cli       # CLI for sending/receiving messages
+      - terminal-ui         # Full TUI (terminal user interface) client
+      - file-upload         # Specialized for file/log uploads
+      - notification-tool   # Multi-service notification utility
+      - libpurple-plugin    # Plugin for Pidgin/Finch
+      - bot-framework       # Framework for building bots
+      - api-wrapper         # Low-level API wrapper/library
+
+  secondary-categories:
+    description: "Additional applicable categories"
+    type: array
+    required: false
+
+  # ---------------------------------------------------------------------------
+  # SLACK-SPECIFIC FEATURES
+  # ---------------------------------------------------------------------------
+  features:
+    description: "List of supported features"
+    type: array
+    required: false
+    example:
+      - "Send messages"
+      - "File uploads"
+      - "Thread support"
+      - "Emoji reactions"
+
+  slack-features:
+    description: "Detailed Slack feature support"
+    type: object
+    required: false
+    properties:
+      send-messages:
+        type: boolean
+        description: "Can send messages to channels/DMs"
+      receive-messages:
+        type: boolean
+        description: "Can receive/stream messages"
+      file-upload:
+        type: boolean
+        description: "Can upload files"
+      thread-support:
+        type: boolean
+        description: "Supports message threading"
+      reactions:
+        type: boolean
+        description: "Supports emoji reactions"
+      channel-browse:
+        type: boolean
+        description: "Can list/browse channels"
+      user-status:
+        type: boolean
+        description: "Can set user status"
+      snooze:
+        type: boolean
+        description: "Can manage do-not-disturb/snooze"
+      search:
+        type: boolean
+        description: "Can search messages/files"
+      multi-workspace:
+        type: boolean
+        description: "Supports multiple workspaces"
+      app-development:
+        type: boolean
+        description: "For building Slack apps (official CLI)"
+      workflow-automation:
+        type: boolean
+        description: "Supports workflow triggers/automation"
+
+  # ---------------------------------------------------------------------------
+  # AUTHENTICATION
+  # ---------------------------------------------------------------------------
+  authentication:
+    description: "Supported authentication methods"
+    type: object
+    required: false
+    properties:
+      oauth2:
+        type: boolean
+        description: "Standard OAuth 2.0 flow"
+      legacy-token:
+        type: boolean
+        description: "Legacy token support (deprecated by Slack)"
+      browser-token:
+        type: boolean
+        description: "Manual browser token extraction (xoxc/xoxd)"
+      api-key:
+        type: boolean
+        description: "API key/bot token"
+      env-var-auth:
+        type: boolean
+        description: "Authentication via environment variables"
+      env-var-names:
+        type: array
+        description: "Names of environment variables used"
+      auth-notes:
+        type: array
+        description: "Additional authentication notes"
+
+  # ---------------------------------------------------------------------------
+  # OUTPUT FORMATS (Important for AI/automation)
+  # ---------------------------------------------------------------------------
+  output-formats:
+    description: "Supported output formats"
+    type: object
+    required: false
+    properties:
+      json:
+        type: boolean
+        description: "JSON output support"
+      jsonl:
+        type: boolean
+        description: "JSON Lines (streaming) support"
+      yaml:
+        type: boolean
+        description: "YAML output support"
+      table:
+        type: boolean
+        description: "Formatted table output"
+      plain-text:
+        type: boolean
+        description: "Plain text output"
+      structured:
+        type: boolean
+        description: "Any structured output (for AI parsing)"
+      pipe-friendly:
+        type: boolean
+        description: "Designed for Unix pipe workflows"
+
+  # ---------------------------------------------------------------------------
+  # TERMINAL FEATURES
+  # ---------------------------------------------------------------------------
+  terminal-features:
+    description: "Terminal-specific capabilities"
+    type: object
+    required: false
+    properties:
+      tui:
+        type: boolean
+        description: "Full terminal UI (ncurses-style)"
+      colors:
+        type: boolean
+        description: "Colored output support"
+      unicode-emoji:
+        type: boolean
+        description: "Unicode emoji rendering"
+      autocomplete:
+        type: boolean
+        description: "Tab completion support"
+      image-display:
+        type: boolean
+        description: "Can display images in terminal"
+      image-protocols:
+        type: array
+        description: "Supported image protocols"
+        example:
+          - sixel
+          - iterm
+          - kitty
+      streaming:
+        type: boolean
+        description: "Real-time streaming mode (like tail -f)"
+
+  # ---------------------------------------------------------------------------
+  # INSTALLATION
+  # ---------------------------------------------------------------------------
+  installation:
+    description: "Available installation methods"
+    type: object
+    required: false
+    properties:
+      homebrew:
+        type: string
+        description: "Homebrew formula name"
+      snap:
+        type: string
+        description: "Snap package name"
+      pip:
+        type: string
+        description: "PyPI package name"
+      npm:
+        type: string
+        description: "npm package name"
+      bun:
+        type: boolean
+        description: "Requires Bun runtime"
+      go-install:
+        type: string
+        description: "Go install path"
+      cargo:
+        type: string
+        description: "Cargo crate name"
+      binary:
+        type: boolean
+        description: "Pre-built binary available"
+      docker:
+        type: string
+        description: "Docker image name"
+      aur:
+        type: string
+        description: "AUR package name (Arch Linux)"
+      source-compile:
+        type: boolean
+        description: "Requires compilation from source"
+      curl-install:
+        type: boolean
+        description: "One-line curl install script"
+
+  # ---------------------------------------------------------------------------
+  # DOCUMENTATION
+  # ---------------------------------------------------------------------------
+  documentation:
+    description: "Documentation quality indicators"
+    type: object
+    required: false
+    properties:
+      readme:
+        type: boolean
+        description: "Has README"
+      api-docs:
+        type: boolean
+        description: "Has API documentation"
+      examples:
+        type: boolean
+        description: "Has usage examples"
+      wiki:
+        type: boolean
+        description: "Has GitHub wiki"
+      website:
+        type: string
+        description: "Project website URL"
+      tests:
+        type: boolean
+        description: "Has test suite"
+
+  # ---------------------------------------------------------------------------
+  # AI/AUTOMATION FRIENDLINESS
+  # ---------------------------------------------------------------------------
+  ai-friendly:
+    description: "Suitability for AI agent integration"
+    type: object
+    required: false
+    properties:
+      designed-for-ai:
+        type: boolean
+        description: "Explicitly designed for AI/LLM use"
+      structured-output:
+        type: boolean
+        description: "Has structured output for parsing"
+      scriptable:
+        type: boolean
+        description: "Easy to script/automate"
+      stateless:
+        type: boolean
+        description: "Stateless command execution"
+      ci-cd-friendly:
+        type: boolean
+        description: "Suitable for CI/CD pipelines"
+      notes:
+        type: array
+        description: "AI integration notes"
+
+  # ---------------------------------------------------------------------------
+  # NOTES
+  # ---------------------------------------------------------------------------
+  notes:
+    description: "Additional notes and observations"
+    type: array
+    required: false
+
+  warnings:
+    description: "Important warnings or caveats"
+    type: array
+    required: false
+
+# =============================================================================
+# CATEGORY DEFINITIONS
+# =============================================================================
+
+categories:
+  official-cli:
+    description: "Official Slack CLI for building and deploying Slack apps"
+    examples:
+      - "slackapi/slack-cli"
+
+  messaging-cli:
+    description: "Command-line tools for sending/receiving Slack messages"
+    examples:
+      - "rockymadden/slack-cli"
+      - "regisb/slack-cli"
+      - "shaharia-lab/slackcli"
+
+  terminal-ui:
+    description: "Full terminal user interface for Slack"
+    examples:
+      - "jpbruinsslot/slack-term"
+
+  file-upload:
+    description: "Tools specialized for uploading files/logs to Slack"
+    examples:
+      - "bcicen/slackcat"
+
+  notification-tool:
+    description: "Multi-service notification utilities that include Slack"
+    examples:
+      - "yfiton/yfiton"
+
+  libpurple-plugin:
+    description: "Plugins for Pidgin/Finch that add Slack support"
+    examples:
+      - "dylex/slack-libpurple"
+
+# =============================================================================
+# MAINTENANCE TIER DEFINITIONS
+# =============================================================================
+
+maintenance-tiers:
+  active-development:
+    description: "Actively maintained with regular releases and responsive issue handling"
+    indicators:
+      - "Commits within last 3 months"
+      - "Issues are being triaged"
+      - "Regular releases"
+
+  maintenance-mode:
+    description: "Only security fixes, maintainer has declared limited support"
+    indicators:
+      - "Explicit maintenance mode declaration"
+      - "No new features planned"
+      - "May accept security PRs"
+
+  community-sustained:
+    description: "Occasional community contributions keep the project functional"
+    indicators:
+      - "Sporadic commits from multiple contributors"
+      - "Maintainer has limited availability"
+      - "PRs may be merged slowly"
+
+  unmaintained:
+    description: "No active maintenance, issues go unanswered"
+    indicators:
+      - "No commits in >6 months"
+      - "Issues pile up without response"
+      - "No maintainer activity"
+
+  archived:
+    description: "Repository is officially archived and read-only"
+    indicators:
+      - "GitHub archived flag set"
+      - "No future development possible"

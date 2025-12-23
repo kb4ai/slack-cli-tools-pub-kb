@@ -1,0 +1,102 @@
+last-update: "2025-12-23"
+repo-url: "https://github.com/slackapi/slack-cli"
+
+name: "slack-cli"
+description: "Official CLI for building Slack apps with Deno Slack SDK and Bolt frameworks"
+language: "Go"
+languages:
+  - "Go (97.6%)"
+  - "Shell (1.3%)"
+license: "Apache-2.0"
+
+stars: 87
+forks: 26
+watchers: 7
+contributors: 38
+open-issues: 18
+closed-issues: 7
+
+last-commit: "2025-12-17"
+created: "2025-03-31"
+last-release: "2025-11-27"
+last-release-version: "v3.10.0"
+total-releases: 40
+commit-frequency: very-active
+
+reputable-source: true
+organization: "Slack/Salesforce"
+archived: false
+maintenance-tier: active-development
+
+category: official-cli
+
+features:
+  - "Create Slack apps from templates"
+  - "Local development environment"
+  - "App deployment to Slack platform"
+  - "Workflow triggers management"
+  - "Datastore queries"
+  - "Function and trigger configuration"
+  - "Activity log access"
+
+slack-features:
+  app-development: true
+  workflow-automation: true
+  multi-workspace: true
+  send-messages: false  # Not for messaging, for app development
+  receive-messages: false
+
+authentication:
+  oauth2: true
+  legacy-token: false
+  browser-token: false
+  env-var-auth: true
+  auth-notes:
+    - "Standard OAuth flow for app development"
+    - "Service token support for CI/CD"
+
+output-formats:
+  json: true
+  plain-text: true
+  structured: true
+  pipe-friendly: true
+
+terminal-features:
+  tui: false
+  colors: true
+  streaming: false
+
+installation:
+  homebrew: "slack-cli"
+  binary: true
+  curl-install: true
+  source-compile: true
+
+documentation:
+  readme: true
+  api-docs: true
+  examples: true
+  website: "https://docs.slack.dev/tools/slack-cli/"
+  tests: true
+
+ai-friendly:
+  designed-for-ai: false
+  structured-output: true
+  scriptable: true
+  stateless: true
+  ci-cd-friendly: true
+  notes:
+    - "Excellent for CI/CD deployment pipelines"
+    - "Service token support enables automation"
+
+notes:
+  - "Open-sourced on April 10, 2025"
+  - "Primary tool for building Slack apps"
+  - "Integrates with Deno Slack SDK"
+  - "Supports Bolt frameworks (JavaScript, Python)"
+  - "256 commits on main branch"
+  - "Active development with 2-4 commits per week"
+  - "No terminal image display support (Sixel/iTerm/Kitty)"
+
+warnings:
+  - "Not for daily messaging - focused on app development"

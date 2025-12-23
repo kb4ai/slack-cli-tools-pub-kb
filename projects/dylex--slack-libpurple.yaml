@@ -1,0 +1,96 @@
+last-update: "2025-12-23"
+repo-url: "https://github.com/dylex/slack-libpurple"
+
+name: "slack-libpurple"
+description: "libpurple protocol plugin enabling Slack in Pidgin/Finch terminal clients"
+language: "C"
+license: "GPL-2.0"
+languages:
+  - "C (98.5%)"
+  - "Makefile (1.5%)"
+
+stars: 286
+forks: 42
+watchers: 17
+contributors: 25
+open-issues: 59
+closed-issues: 75
+
+last-commit: "2025-07-26"
+created: "2017-06-22"
+last-release: "2025-07-26"
+last-release-version: "nightly-1115ec1"
+commit-frequency: sporadic
+
+reputable-source: false
+archived: false
+maintenance-tier: community-sustained
+
+category: libpurple-plugin
+
+features:
+  - "Slack support in Pidgin"
+  - "Slack support in Finch (terminal)"
+  - "Multi-protocol IM consolidation"
+  - "IRC/XMPP/Slack unified interface"
+  - "Channel browsing"
+  - "Real-time messaging"
+
+slack-features:
+  send-messages: true
+  receive-messages: true
+  channel-browse: true
+  multi-workspace: false
+  # thread-support: TBD
+
+authentication:
+  oauth2: true
+  legacy-token: false  # Deprecated
+  browser-token: true
+  env-var-auth: false
+  auth-notes:
+    - "Supports multiple auth methods including browser token"
+    - "2FA incompatible (Issue #115)"
+    - "May require manual token extraction for some workspaces"
+
+output-formats:
+  # N/A - integrated into Pidgin/Finch UI
+
+terminal-features:
+  tui: true  # Via Finch
+  colors: true
+  unicode-emoji: true
+
+installation:
+  source-compile: true
+  aur: "slack-libpurple-git"
+
+documentation:
+  readme: true
+  examples: false
+
+ai-friendly:
+  designed-for-ai: false
+  scriptable: false
+  notes:
+    - "GUI/TUI plugin, not for scripting"
+    - "Not suitable for automation"
+
+notes:
+  - "Enables Slack in existing Pidgin/Finch/Bitlbee workflows"
+  - "Useful for multi-protocol IM consolidation"
+  - "389 total commits, 25 contributors"
+  - "Primary contributor: dylex (279 commits)"
+  - "Requires libpurple development libraries"
+  - "Installation: sudo make install"
+  - "Windows pre-built binaries available"
+  - "Supports channels, DMs, threads, message editing/deletion"
+  - "~15 configuration parameters available"
+
+warnings:
+  - "2FA NOT SUPPORTED (Issue #115 open since 2020)"
+  - "Workaround: extract xoxc- from localStorage + xoxd- cookie"
+  - "Setup complexity higher than standalone CLIs"
+  - "Requires source compilation on Linux/macOS"
+  - "Maintainer (@dylex) has limited availability"
+  - "Browser tokens may have different access scopes"

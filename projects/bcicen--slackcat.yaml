@@ -1,0 +1,105 @@
+last-update: "2025-12-23"
+repo-url: "https://github.com/bcicen/slackcat"
+
+name: "slackcat"
+description: "Go CLI for posting command output and files to Slack with streaming support"
+language: "Go"
+languages:
+  - "Go (79.6%)"
+  - "Vim Script (11.6%)"
+  - "Makefile (5.6%)"
+license: "MIT"
+
+stars: 1200
+forks: 56
+watchers: 19
+contributors: 14
+open-issues: 9
+closed-issues: 50
+
+last-commit: "2021-07-21"
+created: "2015-12-30"
+last-release: "2024-07-21"
+last-release-version: "v1.7.3"
+total-releases: 24
+commit-frequency: sporadic
+
+reputable-source: false
+archived: false
+maintenance-tier: community-sustained
+
+category: file-upload
+secondary-categories:
+  - messaging-cli
+
+features:
+  - "Post command output to Slack"
+  - "File uploads"
+  - "Streaming mode (tail -f style)"
+  - "Thread support"
+  - "Custom bot usernames"
+  - "Channel targeting"
+  - "Snippet creation"
+
+slack-features:
+  send-messages: true
+  file-upload: true
+  thread-support: true
+  channel-browse: false
+  receive-messages: false
+  multi-workspace: false
+
+authentication:
+  oauth2: true
+  legacy-token: true
+  browser-token: false
+  env-var-auth: true
+  auth-notes:
+    - "OAuth configuration via --configure"
+    - "Supports both legacy and OAuth tokens"
+
+output-formats:
+  plain-text: true
+  pipe-friendly: true
+
+terminal-features:
+  tui: false
+  colors: false
+  streaming: true
+  image-display: false
+  image-protocols: []
+
+installation:
+  homebrew: "slackcat"
+  binary: true
+  go-install: "github.com/bcicen/slackcat"
+  source-compile: true
+
+documentation:
+  readme: true
+  examples: true
+  website: "http://slackcat.chat"
+  tests: false
+
+ai-friendly:
+  designed-for-ai: false
+  scriptable: true
+  stateless: true
+  ci-cd-friendly: true
+  notes:
+    - "Excellent for CI/CD log forwarding"
+    - "Streaming mode ideal for monitoring"
+    - "Single-binary Go distribution simplifies container packaging"
+
+notes:
+  - "Purpose-built for log streaming"
+  - "Stable 1.7.x series with releases through 2024"
+  - "202 total commits on master branch"
+  - "Usage: tail -F log | slackcat --stream --channel ops"
+  - "MIT license permits enterprise adoption"
+  - "Streaming mode introduced in v0.8 (2016-01-11)"
+  - "No terminal image display - focuses on file uploads to Slack"
+
+warnings:
+  - "Last code commit July 2021 (but releases continued through 2024)"
+  - "Narrow scope - primarily for file/log uploads"

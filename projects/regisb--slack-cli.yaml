@@ -1,0 +1,100 @@
+last-update: "2025-12-23"
+repo-url: "https://github.com/regisb/slack-cli"
+
+name: "slack-cli"
+description: "Python CLI for productive developers with team switching and message streaming"
+language: "Python"
+languages:
+  - "Python (97.4%)"
+  - "Makefile (2.6%)"
+license: "MIT"
+
+stars: 171
+forks: 25
+watchers: 10
+contributors: 3
+open-issues: 8
+closed-issues: 28
+
+last-commit: "2020-12-15"
+created: "2016-03-24"
+commit-frequency: stale
+
+reputable-source: false
+archived: false
+maintenance-tier: maintenance-mode
+
+category: messaging-cli
+
+features:
+  - "Team switching between workspaces"
+  - "Message streaming"
+  - "Tab autocomplete"
+  - "Emoji rendering"
+  - "Multi-team management"
+  - "Stdin piping"
+
+slack-features:
+  send-messages: true
+  receive-messages: true
+  multi-workspace: true
+  channel-browse: true
+  # file-upload: TBD
+  # thread-support: TBD
+
+authentication:
+  oauth2: false  # Partial
+  legacy-token: true
+  browser-token: false
+  env-var-auth: true
+  auth-notes:
+    - "Maintenance mode limits auth updates"
+    - "May have compatibility issues with evolving Slack auth"
+
+output-formats:
+  plain-text: true
+  pipe-friendly: true
+
+terminal-features:
+  tui: false
+  colors: true
+  unicode-emoji: true
+  autocomplete: true
+  streaming: true
+
+installation:
+  pip: "slack-cli"
+
+terminal-features:
+  tui: false
+  colors: true
+  unicode-emoji: true
+  autocomplete: true
+  streaming: true
+  image-display: false
+  image-protocols: []
+
+documentation:
+  readme: true
+  examples: true
+  tests: true
+
+ai-friendly:
+  scriptable: true
+  stateless: false
+  notes:
+    - "Good for scripting in Python environments"
+    - "Stdin piping enables automation"
+
+notes:
+  - "Explicit maintenance mode declaration in README"
+  - "Maintainer open to transferring ownership"
+  - "Last commit December 15, 2020"
+  - "PyPI package: slack-cli (v2.0.1)"
+  - "14.1% fork ratio suggests active experimentation prior to maintenance mode"
+
+warnings:
+  - "IN MAINTENANCE MODE - security fixes only"
+  - "No new features planned"
+  - "May have compatibility issues with evolving Slack authentication"
+  - "Maintainer seeking new maintainer"

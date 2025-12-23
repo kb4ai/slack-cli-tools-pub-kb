@@ -1,0 +1,79 @@
+last-update: "2025-12-23"
+repo-url: "https://github.com/cleentfaar/slack-cli"
+
+name: "slack-cli"
+description: "PHP-based CLI distributed as PHAR for Slack API access (archived)"
+language: "PHP"
+languages:
+  - "PHP (98.7%)"
+  - "Shell (1.3%)"
+license: "MIT"
+
+stars: 29
+forks: 5
+watchers: 3
+contributors: 1
+open-issues: 0
+closed-issues: 0
+
+last-commit: "2021-02-25"
+created: "2014-12-14"
+last-release: "2016-05-30"
+last-release-version: "v0.20.1"
+commit-frequency: abandoned
+
+reputable-source: false
+archived: true
+maintenance-tier: archived
+
+category: api-wrapper
+
+features:
+  - "Command-line access to Slack API methods"
+  - "PHAR distribution"
+  - "Self-update capability"
+
+slack-features:
+  send-messages: true
+  channel-browse: true
+  # Most features available via direct API access
+
+authentication:
+  legacy-token: true
+  oauth2: false
+  auth-notes:
+    - "Relies on outdated Slack API patterns"
+
+output-formats:
+  plain-text: true
+
+terminal-features:
+  tui: false
+
+installation:
+  binary: true  # PHAR file
+  source-compile: true
+
+documentation:
+  readme: true
+  website: "http://cleentfaar.github.io/slack-cli/"
+
+ai-friendly:
+  scriptable: true
+  notes:
+    - "Archived - not recommended for any use"
+
+notes:
+  - "Archived on July 12, 2023"
+  - "Created December 14, 2014 (one of the earliest Slack CLIs)"
+  - "Historical significance - early community CLI effort"
+  - "Single PHAR file distribution"
+  - "PHP version requirement: >=5.5"
+  - "Depends on cleentfaar/slack library (~0.20)"
+
+warnings:
+  - "ARCHIVED - read-only repository"
+  - "No ongoing development or security updates"
+  - "PHP 5.5 requirement is severely outdated"
+  - "Dependency on outdated Slack API patterns"
+  - "DO NOT USE - security and compatibility concerns"

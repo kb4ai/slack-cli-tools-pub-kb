@@ -1,0 +1,14 @@
+{
+  "repository_url": "https://github.com/slackapi/slack-api-specs",
+  "repository_full_name": "slackapi/slack-api-specs",
+  "repository_status": "archived",
+  "archived_date": "2024-03-27",
+  "clone_url": "git@github.com:slackapi/slack-api-specs.git",
+  "file_path": "web-api/slack_web_openapi_v2.json",
+  "commit_hash": "master",
+  "branch": "master",
+  "clone_command": "git clone git@github.com:slackapi/slack-api-specs.git",
+  "retrieval_timestamp": "2026-01-03T00:00:00Z",
+  "retrieval_method": "direct download from GitHub raw content",
+  "note": "Repository archived by Slack on 2024-03-27. Specification remains canonical reference for Slack Web API structure."
+}

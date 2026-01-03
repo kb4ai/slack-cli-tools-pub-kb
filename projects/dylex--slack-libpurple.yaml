@@ -151,6 +151,37 @@ export-capabilities:
 mcp-integration:
   is-mcp-server: false
 
+api-coverage:
+  methods-supported:
+    - "conversations.list"
+    - "conversations.history"
+    - "conversations.replies"
+    - "conversations.open"
+    - "chat.postMessage"
+    - "chat.update"
+    - "chat.delete"
+    - "users.list"
+    - "users.info"
+    - "reactions.add"
+    - "reactions.remove"
+    - "files.upload"
+  undocumented-methods:
+    - method: "rtm.connect"
+      notes: "Deprecated RTM API for real-time updates"
+  coverage-notes:
+    - "12 standard API methods + RTM"
+    - "Full messaging via Pidgin/Finch UI"
+    - "Edit/delete message support"
+    - "Reactions support"
+    - "NOT scriptable - GUI/TUI plugin only"
+  evidence:
+    source-type: "source-code"
+    source-url: "https://github.com/dylex/slack-libpurple"
+    source-file: "slack-api.c"
+    retrieved-date: "2026-01-04"
+    confidence: "verified"
+    notes: "Direct Slack REST API calls via libpurple"
+
 notes:
   - "Enables Slack in existing Pidgin/Finch/Bitlbee workflows"
   - "Useful for multi-protocol IM consolidation"

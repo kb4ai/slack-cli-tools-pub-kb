@@ -140,6 +140,22 @@ export-capabilities:
 mcp-integration:
   is-mcp-server: false
 
+api-coverage:
+  methods-supported:
+    - "chat.postMessage"
+  coverage-notes:
+    - "1 Slack API method only"
+    - "Multi-service notification tool"
+    - "Minimal Slack-specific functionality"
+    - "ABANDONED - not recommended"
+  evidence:
+    source-type: "source-code"
+    source-url: "https://github.com/yfiton/yfiton"
+    source-file: "yfiton-notifiers/yfiton-notifier-slack/src/main/java/com/yfiton/notifiers/slack/SlackNotifier.java"
+    retrieved-date: "2026-01-04"
+    confidence: "verified"
+    notes: "Uses Slack webhook API via chat.postMessage"
+
 notes:
   - "Cross-platform notification consolidation"
   - "Useful for teams with heterogeneous communication platforms"

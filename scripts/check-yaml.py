@@ -56,6 +56,14 @@ VALID_COMMIT_FREQUENCIES = [
     'very-active', 'active', 'moderate', 'sporadic', 'stale', 'abandoned'
 ]
 
+VALID_EVIDENCE_SOURCE_TYPES = [
+    'source-code', 'documentation', 'readme', 'github-api', 'manual-test', 'inferred'
+]
+
+VALID_EVIDENCE_CONFIDENCE = [
+    'verified', 'likely', 'inferred', 'uncertain'
+]
+
 INTEGER_FIELDS = ['stars', 'forks', 'watchers', 'contributors', 'open-issues',
                   'closed-issues', 'total-releases']
 
@@ -134,6 +142,41 @@ def validate_type(value, field_name, expected_type, type_name):
     if not isinstance(value, expected_type):
         return f"Invalid type for '{field_name}': expected {type_name}, got {type(value).__name__}"
     return None
+
+
+def validate_evidence(evidence: dict, prefix: str, result: 'ValidationResult'):
+    """Validate an evidence sub-object."""
+    # Validate source-type enum
+    if 'source-type' in evidence and evidence['source-type']:
+        error = validate_enum(evidence['source-type'], f'{prefix}.source-type',
+                             VALID_EVIDENCE_SOURCE_TYPES)
+        if error:
+            result.add_warning(error)
+
+    # Validate confidence enum
+    if 'confidence' in evidence and evidence['confidence']:
+        error = validate_enum(evidence['confidence'], f'{prefix}.confidence',
+                             VALID_EVIDENCE_CONFIDENCE)
+        if error:
+            result.add_warning(error)
+
+    # Validate retrieved-date format
+    if 'retrieved-date' in evidence and evidence['retrieved-date']:
+        error = validate_date(evidence['retrieved-date'], f'{prefix}.retrieved-date')
+        if error:
+            result.add_warning(error)
+
+    # Validate source-url format
+    if 'source-url' in evidence and evidence['source-url']:
+        error = validate_url(evidence['source-url'], f'{prefix}.source-url')
+        if error:
+            result.add_warning(error)
+
+    # Validate source-commit format
+    if 'source-commit' in evidence and evidence['source-commit']:
+        error = validate_commit_hash(evidence['source-commit'], f'{prefix}.source-commit')
+        if error:
+            result.add_warning(error)
 
 
 def validate_file(filepath: Path, verbose: bool = False) -> ValidationResult:
@@ -225,10 +268,46 @@ def validate_file(filepath: Path, verbose: bool = False) -> ValidationResult:
 
     # Validate object fields
     for field in ['slack-features', 'authentication', 'output-formats', 'terminal-features',
-                  'installation', 'documentation', 'ai-friendly']:
+                  'installation', 'documentation', 'ai-friendly', 'read-capabilities',
+                  'query-options', 'communication-features', 'attachment-handling',
+                  'export-capabilities', 'mcp-integration', 'api-coverage']:
         if field in data and data[field] is not None:
             if not isinstance(data[field], dict):
                 result.add_error(f"Field '{field}' must be an object, got {type(data[field]).__name__}")
+
+    # Validate api-coverage section
+    if 'api-coverage' in data and isinstance(data['api-coverage'], dict):
+        api_cov = data['api-coverage']
+
+        # Validate methods arrays
+        for array_field in ['methods-supported', 'methods-planned', 'coverage-notes']:
+            if array_field in api_cov and api_cov[array_field] is not None:
+                if not isinstance(api_cov[array_field], list):
+                    result.add_error(f"api-coverage.{array_field} must be an array")
+
+        # Validate methods-partial (array of objects or strings)
+        if 'methods-partial' in api_cov and api_cov['methods-partial']:
+            if not isinstance(api_cov['methods-partial'], list):
+                result.add_error("api-coverage.methods-partial must be an array")
+            else:
+                for i, item in enumerate(api_cov['methods-partial']):
+                    if isinstance(item, dict):
+                        if 'method' not in item:
+                            result.add_warning(f"api-coverage.methods-partial[{i}] should have 'method' field")
+
+        # Validate undocumented-methods (array of objects)
+        if 'undocumented-methods' in api_cov and api_cov['undocumented-methods']:
+            if not isinstance(api_cov['undocumented-methods'], list):
+                result.add_error("api-coverage.undocumented-methods must be an array")
+            else:
+                for i, item in enumerate(api_cov['undocumented-methods']):
+                    if isinstance(item, dict):
+                        if 'method' not in item:
+                            result.add_warning(f"api-coverage.undocumented-methods[{i}] should have 'method' field")
+
+        # Validate evidence sub-object if present
+        if 'evidence' in api_cov and isinstance(api_cov['evidence'], dict):
+            validate_evidence(api_cov['evidence'], 'api-coverage.evidence', result)
 
     # Filename convention check
     expected_pattern = re.compile(r'^[a-zA-Z0-9_-]+--[a-zA-Z0-9_-]+\.yaml$')

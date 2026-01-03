@@ -160,6 +160,34 @@ export-capabilities:
 mcp-integration:
   is-mcp-server: false
 
+api-coverage:
+  methods-supported:
+    - "auth.test"
+    - "chat.postMessage"
+    - "files.upload"
+    - "conversations.list"
+    - "users.list"
+    - "users.info"
+    - "users.getPresence"
+    - "users.setPresence"
+    - "users.profile.set"
+    - "dnd.setSnooze"
+    - "dnd.endSnooze"
+    - "dnd.info"
+  coverage-notes:
+    - "12 Slack API methods via curl"
+    - "Pure Bash implementation using curl"
+    - "No message reading (conversations.history not implemented)"
+    - "Status/DND management supported"
+    - "Legacy token auth likely broken"
+  evidence:
+    source-type: "source-code"
+    source-url: "https://github.com/rockymadden/slack-cli"
+    source-file: "src/slack"
+    retrieved-date: "2026-01-04"
+    confidence: "verified"
+    notes: "API calls identified from Bash script curl commands"
+
 notes:
   - "Pioneering early Slack CLI tool"
   - "Very popular historically (~1100 stars)"

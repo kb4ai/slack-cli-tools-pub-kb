@@ -164,6 +164,25 @@ export-capabilities:
 mcp-integration:
   is-mcp-server: false
 
+api-coverage:
+  methods-supported:
+    - "auth.test"
+    - "chat.postMessage"
+    - "files.upload"
+    - "conversations.list"
+  coverage-notes:
+    - "4 core Slack API methods"
+    - "Send-only tool - no read APIs"
+    - "Focused on file upload and message posting"
+    - "Streaming mode uses chat.postMessage repeatedly"
+  evidence:
+    source-type: "source-code"
+    source-url: "https://github.com/bcicen/slackcat"
+    source-file: "slackcat.go"
+    retrieved-date: "2026-01-04"
+    confidence: "verified"
+    notes: "Uses nlopes/slack Go SDK"
+
 notes:
   - "Purpose-built for log streaming"
   - "Stable 1.7.x series with releases through 2024"

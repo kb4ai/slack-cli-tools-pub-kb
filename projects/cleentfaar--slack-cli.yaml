@@ -133,6 +133,22 @@ export-capabilities:
 mcp-integration:
   is-mcp-server: false
 
+api-coverage:
+  methods-supported:
+    - "chat.postMessage"
+    - "channels.list"
+  coverage-notes:
+    - "ARCHIVED - historical interest only"
+    - "Generic API wrapper - limited method support"
+    - "Relies on deprecated Slack API patterns"
+    - "DO NOT USE - security and compatibility concerns"
+  evidence:
+    source-type: "source-code"
+    source-url: "https://github.com/cleentfaar/slack-cli"
+    retrieved-date: "2026-01-04"
+    confidence: "inferred"
+    notes: "Based on cleentfaar/slack PHP library capabilities"
+
 notes:
   - "Archived on July 12, 2023"
   - "Created December 14, 2014 (one of the earliest Slack CLIs)"

@@ -160,6 +160,20 @@ export-capabilities:
 mcp-integration:
   is-mcp-server: false
 
+api-coverage:
+  methods-supported: []
+  coverage-notes:
+    - "NOT a messaging CLI - app development tool only"
+    - "Does not call standard Slack Web API methods"
+    - "Uses Slack Platform APIs for app deployment"
+    - "Interacts with Deno Slack SDK and Bolt frameworks"
+  evidence:
+    source-type: "documentation"
+    source-url: "https://docs.slack.dev/tools/slack-cli/"
+    retrieved-date: "2026-01-04"
+    confidence: "verified"
+    notes: "Official Slack CLI for app development, not messaging"
+
 notes:
   - "Open-sourced on April 10, 2025"
   - "Primary tool for building Slack apps"

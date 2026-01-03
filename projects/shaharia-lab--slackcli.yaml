@@ -188,6 +188,34 @@ notes:
   - "BEST TOOL for AI/automation with JSON output"
   - "ONLY CLI with full read + write + thread support"
 
+api-coverage:
+  methods-supported:
+    - "auth.test"
+    - "conversations.list"
+    - "conversations.history"
+    - "conversations.replies"
+    - "conversations.open"
+    - "chat.postMessage"
+    - "users.info"
+  methods-partial:
+    - method: "users.info"
+      limitation: "Batch calls individual users.info per user (not bulk API)"
+  coverage-notes:
+    - "7 core Slack API methods implemented"
+    - "No file upload/download support"
+    - "No message editing or deletion (chat.update/delete not implemented)"
+    - "No emoji reactions (reactions.add not implemented)"
+    - "No search.messages despite documentation reference"
+    - "Full thread support via conversations.replies"
+    - "DM support via conversations.open"
+  evidence:
+    source-type: "source-code"
+    source-url: "https://github.com/shaharia-lab/slackcli"
+    source-file: "src/lib/slack-client.ts"
+    retrieved-date: "2026-01-04"
+    confidence: "verified"
+    notes: "SlackClient class wraps @slack/web-api SDK"
+
 warnings:
   - "Very new project (< 2 months old)"
   - "Single contributor (bus factor = 1)"

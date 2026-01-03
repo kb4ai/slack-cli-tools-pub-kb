@@ -159,6 +159,31 @@ export-capabilities:
 mcp-integration:
   is-mcp-server: false
 
+api-coverage:
+  methods-supported:
+    - "conversations.list"
+    - "conversations.history"
+    - "conversations.replies"
+    - "chat.postMessage"
+    - "users.list"
+    - "users.info"
+    - "search.messages"
+  undocumented-methods:
+    - method: "rtm.connect"
+      notes: "Deprecated RTM API for real-time messaging"
+  coverage-notes:
+    - "7 standard API methods + deprecated RTM"
+    - "TUI interface - not scriptable"
+    - "Authentication issues with newer Slack workspaces"
+    - "RTM API deprecated by Slack in 2020"
+  evidence:
+    source-type: "source-code"
+    source-url: "https://github.com/jpbruinsslot/slack-term"
+    source-file: "service/slack.go"
+    retrieved-date: "2026-01-04"
+    confidence: "verified"
+    notes: "Uses nlopes/slack Go SDK"
+
 notes:
   - "Originally erroneousboat/slack-term, transferred to jpbruinsslot"
   - "77.9% issue resolution rate (183 closed vs 52 open)"

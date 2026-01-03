@@ -165,6 +165,29 @@ export-capabilities:
 mcp-integration:
   is-mcp-server: false
 
+api-coverage:
+  methods-supported:
+    - "conversations.list"
+    - "chat.postMessage"
+    - "users.list"
+  undocumented-methods:
+    - method: "rtm.connect"
+      notes: "Deprecated RTM WebSocket API for streaming"
+    - method: "channels.history"
+      notes: "Deprecated - replaced by conversations.history"
+  coverage-notes:
+    - "3 standard API methods + 2 deprecated"
+    - "Heavy reliance on deprecated RTM API"
+    - "No thread support (thread_ts not handled)"
+    - "Maintenance mode - no new features"
+  evidence:
+    source-type: "source-code"
+    source-url: "https://github.com/regisb/slack-cli"
+    source-file: "slackcli/slack.py"
+    retrieved-date: "2026-01-04"
+    confidence: "verified"
+    notes: "Uses slackclient Python SDK"
+
 notes:
   - "Explicit maintenance mode declaration in README"
   - "Maintainer open to transferring ownership"

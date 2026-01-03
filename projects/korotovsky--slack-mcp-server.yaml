@@ -206,6 +206,38 @@ mcp-integration:
     - "Perfect for background AI monitoring"
     - "Compatible with Claude Desktop, Cline, etc."
 
+api-coverage:
+  methods-supported:
+    - "auth.test"
+    - "conversations.list"
+    - "conversations.history"
+    - "conversations.replies"
+    - "conversations.info"
+    - "conversations.open"
+    - "chat.postMessage"
+    - "users.list"
+    - "users.info"
+    - "users.conversations"
+    - "search.messages"
+    - "team.info"
+  methods-partial:
+    - method: "conversations.history"
+      limitation: "15 messages per request limit for rate limiting"
+  coverage-notes:
+    - "12 Slack API methods via MCP tools"
+    - "5 MCP tools: list_channels, read_channel, read_thread, send_message, reply_to_thread"
+    - "2 MCP resources: slack://channels, slack://users"
+    - "Stealth mode via presence hiding"
+    - "Designed for AI agent automation"
+  evidence:
+    source-type: "source-code"
+    source-url: "https://github.com/korotovsky/slack-mcp-server"
+    source-commit: "91708e3"
+    source-file: "src/mcp_slack_server/slack_client.py"
+    retrieved-date: "2026-01-04"
+    confidence: "verified"
+    notes: "API methods from SlackClient class using slack_sdk"
+
 notes:
   - "BEST MCP SERVER for AI-Slack integration"
   - "Stealth mode is unique differentiator"

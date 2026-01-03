@@ -698,6 +698,107 @@ fields:
         description: "Notes about MCP integration"
 
   # ---------------------------------------------------------------------------
+  # API COVERAGE (Slack REST API method support)
+  # ---------------------------------------------------------------------------
+  api-coverage:
+    description: "Slack REST API method coverage tracking"
+    type: object
+    required: false
+    properties:
+      methods-supported:
+        type: array
+        description: "List of Slack API methods this tool directly supports"
+        example:
+          - "conversations.history"
+          - "conversations.list"
+          - "chat.postMessage"
+      methods-partial:
+        type: array
+        description: "Methods with limited parameter support"
+        items:
+          type: object
+          properties:
+            method:
+              type: string
+            limitation:
+              type: string
+        example:
+          - method: "files.upload"
+            limitation: "Only basic upload, no threading parameter"
+      methods-planned:
+        type: array
+        description: "Methods planned for future support"
+      undocumented-methods:
+        type: array
+        description: "APIs used but not in official OpenAPI spec (e.g., RTM, internal)"
+        items:
+          type: object
+          properties:
+            method:
+              type: string
+            notes:
+              type: string
+        example:
+          - method: "rtm.connect"
+            notes: "Deprecated RTM API, not in OpenAPI spec"
+      coverage-notes:
+        type: array
+        description: "Notes about API coverage limitations"
+      evidence:
+        $ref: "#/definitions/evidence"
+
+  # ---------------------------------------------------------------------------
+  # EVIDENCE (Reusable provenance tracking pattern)
+  # ---------------------------------------------------------------------------
+  # This can be added as a sub-object to any section for field-level provenance
+  evidence:
+    description: "Source and verification info for data in this section (reusable pattern)"
+    type: object
+    required: false
+    properties:
+      source-type:
+        type: string
+        description: "Type of source used for this information"
+        enum:
+          - source-code      # Verified by reading source code
+          - documentation    # From official documentation
+          - readme           # From repository README
+          - github-api       # From GitHub API queries
+          - manual-test      # Verified by running the tool
+          - inferred         # Inferred from behavior/context
+      source-url:
+        type: string
+        description: "URL to source (repo, doc page, file permalink)"
+        example: "https://github.com/user/repo/blob/abc123/src/api.ts"
+      source-commit:
+        type: string
+        description: "Git commit hash when source was analyzed"
+        example: "abc1234"
+      source-file:
+        type: string
+        description: "File path within repository"
+        example: "src/commands/messages.ts"
+      source-lines:
+        type: string
+        description: "Line range in source file"
+        example: "45-67"
+      retrieved-date:
+        type: string
+        format: "YYYY-MM-DD"
+        description: "Date when information was retrieved/verified"
+      confidence:
+        type: string
+        description: "Confidence level in this information"
+        enum:
+          - verified         # Directly verified from source code or testing
+          - likely           # Strong evidence but not directly verified
+          - inferred         # Inferred from behavior or indirect evidence
+          - uncertain        # Best guess, needs verification
+      notes:
+        type: string
+        description: "Additional context about source or verification"
+
+  # ---------------------------------------------------------------------------
   # NOTES
   # ---------------------------------------------------------------------------
   notes:

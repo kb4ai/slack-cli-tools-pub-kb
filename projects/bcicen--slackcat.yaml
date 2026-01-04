@@ -180,8 +180,8 @@ api-coverage:
     source-url: "https://github.com/bcicen/slackcat"
     source-file: "slackcat.go"
     retrieved-date: "2026-01-04"
-    confidence: "verified"
-    notes: "Uses nlopes/slack Go SDK"
+    confidence: "inferred-from-deps"
+    notes: "API methods inferred from nlopes/slack Go SDK usage"
 
 notes:
   - "Purpose-built for log streaming"

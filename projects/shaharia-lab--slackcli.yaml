@@ -213,8 +213,8 @@ api-coverage:
     source-url: "https://github.com/shaharia-lab/slackcli"
     source-file: "src/lib/slack-client.ts"
     retrieved-date: "2026-01-04"
-    confidence: "verified"
-    notes: "SlackClient class wraps @slack/web-api SDK"
+    confidence: "inferred-from-deps"
+    notes: "API methods inferred from @slack/web-api SDK usage in SlackClient class"
 
 warnings:
   - "Very new project (< 2 months old)"

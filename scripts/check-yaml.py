@@ -61,7 +61,21 @@ VALID_EVIDENCE_SOURCE_TYPES = [
 ]
 
 VALID_EVIDENCE_CONFIDENCE = [
-    'verified', 'likely', 'inferred', 'uncertain'
+    # Verified levels (high confidence)
+    'verified-source-code',
+    'verified-manual-test',
+    'verified-api-response',
+    # Documentation-based levels (medium confidence)
+    'from-readme',
+    'from-docs',
+    'from-changelog',
+    # Inferred levels (lower confidence)
+    'inferred-from-features',
+    'inferred-from-deps',
+    'inferred-from-similar',
+    # Uncertain (needs verification)
+    'unverified',
+    'stale',
 ]
 
 INTEGER_FIELDS = ['stars', 'forks', 'watchers', 'contributors', 'open-issues',

@@ -788,12 +788,26 @@ fields:
         description: "Date when information was retrieved/verified"
       confidence:
         type: string
-        description: "Confidence level in this information"
+        description: "Confidence level indicating HOW the information was verified"
         enum:
-          - verified         # Directly verified from source code or testing
-          - likely           # Strong evidence but not directly verified
-          - inferred         # Inferred from behavior or indirect evidence
-          - uncertain        # Best guess, needs verification
+          # Verified levels (high confidence)
+          - verified-source-code    # Directly verified by reading source code
+          - verified-manual-test    # Verified by actually running the tool
+          - verified-api-response   # Verified from API response or logs
+
+          # Documentation-based levels (medium confidence)
+          - from-readme             # Extracted from README documentation
+          - from-docs               # Extracted from official documentation
+          - from-changelog          # Extracted from changelog/release notes
+
+          # Inferred levels (lower confidence)
+          - inferred-from-features  # Inferred from feature descriptions
+          - inferred-from-deps      # Inferred from dependency analysis (e.g., uses slack-sdk)
+          - inferred-from-similar   # Inferred from similar tool patterns
+
+          # Uncertain (needs verification)
+          - unverified              # Best guess, needs verification
+          - stale                   # Was verified but may be outdated
       notes:
         type: string
         description: "Additional context about source or verification"

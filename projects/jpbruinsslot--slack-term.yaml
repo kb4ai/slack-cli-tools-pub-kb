@@ -181,8 +181,8 @@ api-coverage:
     source-url: "https://github.com/jpbruinsslot/slack-term"
     source-file: "service/slack.go"
     retrieved-date: "2026-01-04"
-    confidence: "verified"
-    notes: "Uses nlopes/slack Go SDK"
+    confidence: "inferred-from-deps"
+    notes: "API methods inferred from nlopes/slack Go SDK usage"
 
 notes:
   - "Originally erroneousboat/slack-term, transferred to jpbruinsslot"

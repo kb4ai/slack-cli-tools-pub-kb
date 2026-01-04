@@ -153,8 +153,8 @@ api-coverage:
     source-url: "https://github.com/yfiton/yfiton"
     source-file: "yfiton-notifiers/yfiton-notifier-slack/src/main/java/com/yfiton/notifiers/slack/SlackNotifier.java"
     retrieved-date: "2026-01-04"
-    confidence: "verified"
-    notes: "Uses Slack webhook API via chat.postMessage"
+    confidence: "inferred-from-features"
+    notes: "Limited to chat.postMessage based on notification-only design"
 
 notes:
   - "Cross-platform notification consolidation"

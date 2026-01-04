@@ -185,8 +185,8 @@ api-coverage:
     source-url: "https://github.com/rockymadden/slack-cli"
     source-file: "src/slack"
     retrieved-date: "2026-01-04"
-    confidence: "verified"
-    notes: "API calls identified from Bash script curl commands"
+    confidence: "verified-source-code"
+    notes: "API endpoints directly visible as curl commands in Bash script"
 
 notes:
   - "Pioneering early Slack CLI tool"

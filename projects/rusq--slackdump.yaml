@@ -257,8 +257,8 @@ api-coverage:
     source-commit: "930ff59"
     source-file: "internal/chunk/processor.go"
     retrieved-date: "2026-01-04"
-    confidence: "verified"
-    notes: "API methods identified from slack-go/slack SDK usage"
+    confidence: "inferred-from-deps"
+    notes: "API methods inferred from slack-go/slack SDK usage patterns, not individually traced"
 
 warnings:
   - "GPL-3.0 license may be restrictive for some uses"

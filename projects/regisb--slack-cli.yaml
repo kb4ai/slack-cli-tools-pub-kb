@@ -185,8 +185,8 @@ api-coverage:
     source-url: "https://github.com/regisb/slack-cli"
     source-file: "slackcli/slack.py"
     retrieved-date: "2026-01-04"
-    confidence: "verified"
-    notes: "Uses slackclient Python SDK"
+    confidence: "inferred-from-deps"
+    notes: "API methods inferred from slackclient Python SDK usage"
 
 notes:
   - "Explicit maintenance mode declaration in README"

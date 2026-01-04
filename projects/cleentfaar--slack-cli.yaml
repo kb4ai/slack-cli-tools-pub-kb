@@ -146,8 +146,8 @@ api-coverage:
     source-type: "source-code"
     source-url: "https://github.com/cleentfaar/slack-cli"
     retrieved-date: "2026-01-04"
-    confidence: "inferred"
-    notes: "Based on cleentfaar/slack PHP library capabilities"
+    confidence: "inferred-from-deps"
+    notes: "API methods inferred from cleentfaar/slack PHP library capabilities"
 
 notes:
   - "Archived on July 12, 2023"

@@ -179,8 +179,8 @@ api-coverage:
     source-url: "https://github.com/dylex/slack-libpurple"
     source-file: "slack-api.c"
     retrieved-date: "2026-01-04"
-    confidence: "verified"
-    notes: "Direct Slack REST API calls via libpurple"
+    confidence: "inferred-from-features"
+    notes: "API methods inferred from feature list and C code structure, not fully traced"
 
 notes:
   - "Enables Slack in existing Pidgin/Finch/Bitlbee workflows"

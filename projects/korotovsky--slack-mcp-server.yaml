@@ -235,8 +235,8 @@ api-coverage:
     source-commit: "91708e3"
     source-file: "src/mcp_slack_server/slack_client.py"
     retrieved-date: "2026-01-04"
-    confidence: "verified"
-    notes: "API methods from SlackClient class using slack_sdk"
+    confidence: "inferred-from-deps"
+    notes: "API methods inferred from slack_sdk Python library usage patterns"
 
 notes:
   - "BEST MCP SERVER for AI-Slack integration"

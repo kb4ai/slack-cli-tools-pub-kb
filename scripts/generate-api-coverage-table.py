@@ -45,6 +45,23 @@ def load_openapi_methods(spec_path: Path) -> Dict[str, List[str]]:
     return dict(methods_by_category)
 
 
+def get_tool_display_name(project: dict) -> str:
+    """
+    Get display name for a tool using owner/repo format.
+
+    This prevents column name collisions when multiple repos have same name
+    (e.g., rockymadden/slack-cli vs regisb/slack-cli vs cleentfaar/slack-cli).
+    """
+    repo_url = project.get('repo-url', '')
+    if 'github.com/' in repo_url:
+        # Extract owner/repo from URL
+        parts = repo_url.split('github.com/')[-1].rstrip('/').split('/')
+        if len(parts) >= 2:
+            return f"{parts[0]}/{parts[1]}"
+    # Fallback to name
+    return project.get('name', project.get('_filename', 'unknown'))
+
+
 def load_projects(projects_dir: Path) -> List[dict]:
     """Load all project YAML files."""
     projects = []
@@ -54,6 +71,7 @@ def load_projects(projects_dir: Path) -> List[dict]:
                 data = yaml.safe_load(f)
                 if data:
                     data['_filename'] = filepath.name
+                    data['_display_name'] = get_tool_display_name(data)
                     projects.append(data)
         except Exception as e:
             print(f"Warning: Error loading {filepath}: {e}")
@@ -148,7 +166,7 @@ def generate_by_category_table(projects: List[dict], all_methods: Dict[str, List
     # Calculate coverage for each tool
     tool_coverage = {}
     for p in active:
-        tool_coverage[p['name']] = calculate_coverage(p, all_methods)
+        tool_coverage[p['_display_name']] = calculate_coverage(p, all_methods)
 
     # Find categories with at least some coverage
     covered_categories = set()
@@ -166,7 +184,7 @@ def generate_by_category_table(projects: List[dict], all_methods: Dict[str, List
     lines.append("Coverage shown as: `covered/total (percentage)`\n")
 
     # Header
-    tool_names = [p['name'] for p in sorted(active, key=lambda x: -(x.get('stars') or 0))]
+    tool_names = [p['_display_name'] for p in sorted(active, key=lambda x: -(x.get('stars') or 0))]
     header = "| Category | " + " | ".join(tool_names) + " |"
     separator = "|" + "|".join(["---"] * (len(tool_names) + 1)) + "|"
 
@@ -206,7 +224,7 @@ def generate_by_category_table(projects: List[dict], all_methods: Dict[str, List
         lines.append("The following tools have no `api-coverage` section:\n")
         for p in excluded:
             reason = p.get('warnings', ['No API coverage data'])[0]
-            lines.append(f"- **{p['name']}**: {reason[:60]}...")
+            lines.append(f"- **{p['_display_name']}**: {reason[:60]}...")
 
     return "\n".join(lines)
 
@@ -252,7 +270,7 @@ def generate_by_tool_table(projects: List[dict], all_methods: Dict[str, List[str
 
     for td in tool_data:
         p = td['project']
-        name = f"[{p['name']}]({p.get('repo-url', '#')})"
+        name = f"[{p['_display_name']}]({p.get('repo-url', '#')})"
         stars = p.get('stars') or 0
         lines.append(
             f"| {name} | {stars} | {td['covered']}/{td['total']} | {td['percentage']}% | {td['top_cats']} |"
@@ -305,7 +323,7 @@ def generate_gaps_table(projects: List[dict], all_methods: Dict[str, List[str]])
         covered = supported | partial
         gaps = all_method_names - covered
 
-        lines.append(f"\n### {p['name']}")
+        lines.append(f"\n### {p['_display_name']}")
         lines.append(f"Covered: {len(covered)}/{len(all_method_names)} ({round(len(covered)/len(all_method_names)*100, 1)}%)\n")
 
         if gaps:

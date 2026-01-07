@@ -2,6 +2,8 @@
 
 Docker setup for [korotovsky/slack-mcp-server](https://github.com/korotovsky/slack-mcp-server) - a Model Context Protocol (MCP) server for Slack integration.
 
+**This container includes [f/mcptools](https://github.com/f/mcptools) for CLI access to the MCP server.**
+
 ## Overview
 
 This MCP server enables AI assistants (like Claude) to interact with Slack workspaces through the MCP protocol. It provides tools for:
@@ -9,6 +11,8 @@ This MCP server enables AI assistants (like Claude) to interact with Slack works
 * Reading messages from channels
 * Posting messages to channels
 * Managing Slack workspace interactions
+
+Additionally, with the included [f/mcptools](https://github.com/f/mcptools), you can interact with the MCP server directly from the command line without needing an AI assistant.
 
 ## Prerequisites
 
@@ -29,7 +33,7 @@ This MCP server enables AI assistants (like Claude) to interact with Slack works
 SLACK_BOT_TOKEN="xoxb-your-token" ./manage.sh run
 ```
 
-### Available Commands
+### Docker Management Commands
 
 ```bash
 ./manage.sh status  # Check container/image status
@@ -42,6 +46,69 @@ SLACK_BOT_TOKEN="xoxb-your-token" ./manage.sh run
 ./manage.sh verify  # Alias for test
 ./manage.sh clean   # Remove container and image
 ./manage.sh logs    # Show container logs
+```
+
+## CLI Access via mcptools
+
+This container includes [f/mcptools](https://github.com/f/mcptools) - the "Swiss Army Knife" for MCP servers. This provides a universal CLI interface to interact with any MCP server.
+
+### Why mcptools?
+
+Instead of building custom CLI wrappers for each MCP server, mcptools provides:
+
+1. **One CLI for ALL MCP servers** - Same interface for Slack, GitHub, filesystem, etc.
+2. **No custom wrappers needed** - Works with any MCP-compatible server
+3. **Consistent interface** - Learn once, use everywhere
+4. **Easy debugging** - Explore available tools and test them interactively
+
+### CLI Commands (WIP - To Be Tested)
+
+```bash
+# List available MCP tools
+SLACK_BOT_TOKEN=xoxb-... ./manage.sh mcp-tools
+
+# Start interactive MCP shell
+SLACK_BOT_TOKEN=xoxb-... ./manage.sh mcp-shell
+
+# Call any MCP tool with JSON params
+SLACK_BOT_TOKEN=xoxb-... ./manage.sh mcp-call channels_list '{"channel_types":"public_channel"}'
+```
+
+### Convenience Commands (WIP - To Be Tested)
+
+```bash
+# List Slack channels
+SLACK_BOT_TOKEN=xoxb-... ./manage.sh list-channels
+SLACK_BOT_TOKEN=xoxb-... ./manage.sh list-channels "public_channel" 50
+
+# Read channel history
+SLACK_BOT_TOKEN=xoxb-... ./manage.sh read-channel C1234567890
+SLACK_BOT_TOKEN=xoxb-... ./manage.sh read-channel C1234567890 7d  # Last 7 days
+
+# Read thread replies
+SLACK_BOT_TOKEN=xoxb-... ./manage.sh read-thread C1234567890 1234567890.123456
+```
+
+### Available MCP Tools
+
+The Slack MCP server provides these tools:
+
+| Tool | Description |
+|------|-------------|
+| `channels_list` | List available channels and conversations |
+| `conversations_history` | Read messages from channels/DMs |
+| `conversations_replies` | Fetch threaded message replies |
+| `conversations_add_message` | Post messages (disabled by default) |
+| `conversations_search_messages` | Search messages (unavailable with bot tokens) |
+
+### Interactive Shell Example
+
+```bash
+$ SLACK_BOT_TOKEN=xoxb-... ./manage.sh mcp-shell
+mcp > tools                    # List available tools
+mcp > channels_list {"channel_types":"public_channel"}
+mcp > /h                       # Get help
+mcp > /q                       # Quit
 ```
 
 ## MCP Configuration
@@ -69,4 +136,5 @@ To use with Claude Desktop or other MCP clients, add to your MCP configuration:
 ## References
 
 * [korotovsky/slack-mcp-server](https://github.com/korotovsky/slack-mcp-server)
+* [f/mcptools](https://github.com/f/mcptools) - CLI Swiss Army Knife for MCP servers
 * [Model Context Protocol](https://modelcontextprotocol.io/)

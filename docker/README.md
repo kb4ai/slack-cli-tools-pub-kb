@@ -9,7 +9,7 @@ This directory contains Dockerfiles and management scripts for 11 Slack CLI tool
 | slackdump | Go | alpine:3.19 | Workspace exporter |
 | slack-term | Go | alpine:3.19 | Terminal UI client |
 | slackcat | Go | alpine:3.19 | Pipe content to Slack |
-| slack-mcp-server | TypeScript | node:20-alpine | MCP server for AI |
+| slack-mcp-server | Go | alpine:3.22 | MCP server for AI + CLI via [f/mcptools](https://github.com/f/mcptools) |
 | shaharia-slackcli | Bun/TS | oven/bun:alpine | Bun-based CLI |
 | slackapi-slack-cli | Node.js | node:20-alpine | Official Slack CLI (app dev) |
 | rockymadden-slack-cli | Bash | alpine:3.19 | curl/jq based |
@@ -92,3 +92,28 @@ for dir in */; do
     (cd "$dir" && ./manage.sh build && ./manage.sh test && ./manage.sh clean)
 done
 ```
+
+## MCP Server with CLI Access
+
+The `slack-mcp-server` container includes [f/mcptools](https://github.com/f/mcptools) - a "Swiss Army Knife" for MCP servers that provides CLI access to any MCP-compatible server.
+
+This means you can interact with the Slack MCP server directly from the command line:
+
+```bash
+cd slack-mcp-server
+
+# Build the image
+./manage.sh build
+
+# List available MCP tools
+SLACK_BOT_TOKEN=xoxb-... ./manage.sh mcp-tools
+
+# Start interactive MCP shell
+SLACK_BOT_TOKEN=xoxb-... ./manage.sh mcp-shell
+
+# Convenience commands
+SLACK_BOT_TOKEN=xoxb-... ./manage.sh list-channels
+SLACK_BOT_TOKEN=xoxb-... ./manage.sh read-channel C1234567890
+```
+
+See [slack-mcp-server/README.md](slack-mcp-server/README.md) for full documentation.

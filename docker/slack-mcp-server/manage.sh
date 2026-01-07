@@ -272,6 +272,65 @@ cmd_read_thread() {
         slack-mcp-server
 }
 
+cmd_auth() {
+    cat <<EOF
+Slack MCP Server - Authentication Guide
+========================================
+
+This server requires a Slack token to access your workspace. There are 3 options:
+
+OPTION 1: Bot Token (xoxb-...) - Recommended for most users
+-----------------------------------------------------------
+1. Go to https://api.slack.com/apps and create a new app
+2. Under "OAuth & Permissions", add these Bot Token Scopes:
+   - channels:history, channels:read
+   - groups:history, groups:read
+   - im:history, im:read
+   - mpim:history, mpim:read
+   - users:read
+   - (optional) chat:write - for posting messages
+3. Install the app to your workspace
+4. Copy the "Bot User OAuth Token" (starts with xoxb-)
+5. Invite the bot to channels: /invite @YourBotName
+
+Usage:
+  export SLACK_BOT_TOKEN="xoxb-your-token-here"
+  $0 mcp-tools
+
+OPTION 2: User Token (xoxp-...) - Full access including search
+--------------------------------------------------------------
+Same as above but use "User Token Scopes" instead of Bot scopes.
+Add: search:read for message search functionality.
+
+Usage:
+  export SLACK_MCP_XOXP_TOKEN="xoxp-your-token-here"
+  $0 mcp-tools
+
+OPTION 3: Browser Session (xoxc/xoxd) - Quick testing
+------------------------------------------------------
+Extract tokens from your browser (less secure, tokens expire):
+1. Open Slack in browser, press F12 for DevTools
+2. Console tab, run:
+   JSON.parse(localStorage.localConfig_v2).teams[document.location.pathname.match(/^\\/client\\/([A-Z0-9]+)/)[1]].token
+3. Copy the xoxc-... token
+4. Application tab > Cookies > find 'd' cookie value (xoxd-...)
+
+Usage:
+  export SLACK_MCP_XOXC_TOKEN="xoxc-..."
+  export SLACK_MCP_XOXD_TOKEN="xoxd-..."
+  $0 mcp-tools
+
+QUICK START
+-----------
+1. Get a token using one of the methods above
+2. Build: $0 build
+3. Test:  SLACK_BOT_TOKEN=xoxb-... $0 mcp-tools
+4. Use:   SLACK_BOT_TOKEN=xoxb-... $0 list-channels
+
+More info: https://github.com/korotovsky/slack-mcp-server/blob/master/docs/01-authentication-setup.md
+EOF
+}
+
 cmd_help() {
     cat <<EOF
 Slack MCP Server Docker Management Script
@@ -280,6 +339,11 @@ This container includes f/mcptools for CLI access to the MCP server.
 See: https://github.com/f/mcptools
 
 Usage: $0 <command> [args...]
+
+Getting Started:
+  $0 auth      Show authentication guide (how to get Slack tokens)
+  $0 build     Build the Docker image
+  $0 test      Verify the build works
 
 Docker Management Commands:
   status    Show status of container and image
@@ -326,6 +390,9 @@ EOF
 
 # Main command dispatcher
 case "${1:-help}" in
+    # Getting started
+    auth)    cmd_auth ;;
+
     # Docker management commands
     status)  cmd_status ;;
     build)   cmd_build ;;

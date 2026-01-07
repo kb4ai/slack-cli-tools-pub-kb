@@ -17,7 +17,58 @@ Additionally, with the included [f/mcptools](https://github.com/f/mcptools), you
 ## Prerequisites
 
 * Docker installed and running
-* Slack Bot Token with appropriate permissions
+* Slack token (see Authentication below)
+
+## Quick Start
+
+```bash
+# 1. See how to get a Slack token
+./manage.sh auth
+
+# 2. Build the image
+./manage.sh build
+
+# 3. Test with your token
+SLACK_BOT_TOKEN=xoxb-your-token ./manage.sh mcp-tools
+
+# 4. List your channels
+SLACK_BOT_TOKEN=xoxb-your-token ./manage.sh list-channels
+```
+
+## Authentication
+
+Run `./manage.sh auth` for detailed instructions. Summary:
+
+### Option 1: Bot Token (Recommended)
+
+1. Create app at https://api.slack.com/apps
+2. Add Bot Token Scopes: `channels:history`, `channels:read`, `groups:history`, `groups:read`, `im:history`, `im:read`, `mpim:history`, `mpim:read`, `users:read`
+3. Install to workspace and copy the `xoxb-...` token
+4. Invite bot to channels: `/invite @YourBotName`
+
+```bash
+export SLACK_BOT_TOKEN="xoxb-your-token"
+./manage.sh list-channels
+```
+
+### Option 2: User Token (Full Access)
+
+Same as above but use User Token Scopes. Adds `search:read` for message search.
+
+```bash
+export SLACK_MCP_XOXP_TOKEN="xoxp-your-token"
+./manage.sh mcp-tools
+```
+
+### Option 3: Browser Session (Quick Testing)
+
+Extract from browser DevTools - see `./manage.sh auth` for details.
+
+```bash
+export SLACK_MCP_XOXC_TOKEN="xoxc-..."
+export SLACK_MCP_XOXD_TOKEN="xoxd-..."
+./manage.sh mcp-tools
+```
 
 ## Usage
 

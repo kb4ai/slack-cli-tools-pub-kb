@@ -180,14 +180,22 @@ cmd_logs() {
 
 # Internal: Run mcp command inside the container
 _mcp_cmd() {
-    if [ -z "$SLACK_BOT_TOKEN" ]; then
-        log_error "SLACK_BOT_TOKEN is required for CLI commands"
-        log_error "Usage: SLACK_BOT_TOKEN=xoxb-... $0 $1 ..."
+    # Check if any auth token is set
+    if [ -z "$SLACK_BOT_TOKEN" ] && [ -z "$SLACK_MCP_XOXP_TOKEN" ] && [ -z "$SLACK_MCP_XOXC_TOKEN" ]; then
+        log_error "No Slack token found. Set one of:"
+        log_error "  SLACK_MCP_XOXC_TOKEN + SLACK_MCP_XOXD_TOKEN (browser session)"
+        log_error "  SLACK_MCP_XOXP_TOKEN (user OAuth)"
+        log_error "  SLACK_BOT_TOKEN (bot - limited)"
+        log_error ""
+        log_error "Run '$0 auth' for instructions on getting tokens."
         return 1
     fi
 
     docker run --rm -i \
-        -e SLACK_BOT_TOKEN="$SLACK_BOT_TOKEN" \
+        ${SLACK_BOT_TOKEN:+-e SLACK_BOT_TOKEN="$SLACK_BOT_TOKEN"} \
+        ${SLACK_MCP_XOXP_TOKEN:+-e SLACK_MCP_XOXP_TOKEN="$SLACK_MCP_XOXP_TOKEN"} \
+        ${SLACK_MCP_XOXC_TOKEN:+-e SLACK_MCP_XOXC_TOKEN="$SLACK_MCP_XOXC_TOKEN"} \
+        ${SLACK_MCP_XOXD_TOKEN:+-e SLACK_MCP_XOXD_TOKEN="$SLACK_MCP_XOXD_TOKEN"} \
         --entrypoint "" \
         "$IMAGE_NAME" \
         "$@"
@@ -199,10 +207,19 @@ cmd_mcp_tools() {
 }
 
 cmd_mcp_shell() {
+    # Check if any auth token is set
+    if [ -z "$SLACK_BOT_TOKEN" ] && [ -z "$SLACK_MCP_XOXP_TOKEN" ] && [ -z "$SLACK_MCP_XOXC_TOKEN" ]; then
+        log_error "No Slack token found. Run '$0 auth' for instructions."
+        return 1
+    fi
+
     log_info "Starting interactive MCP shell..."
     log_info "Type 'tools' to list available operations, '/h' for help, '/q' to quit"
     docker run --rm -it \
-        -e SLACK_BOT_TOKEN="$SLACK_BOT_TOKEN" \
+        ${SLACK_BOT_TOKEN:+-e SLACK_BOT_TOKEN="$SLACK_BOT_TOKEN"} \
+        ${SLACK_MCP_XOXP_TOKEN:+-e SLACK_MCP_XOXP_TOKEN="$SLACK_MCP_XOXP_TOKEN"} \
+        ${SLACK_MCP_XOXC_TOKEN:+-e SLACK_MCP_XOXC_TOKEN="$SLACK_MCP_XOXC_TOKEN"} \
+        ${SLACK_MCP_XOXD_TOKEN:+-e SLACK_MCP_XOXD_TOKEN="$SLACK_MCP_XOXD_TOKEN"} \
         --entrypoint "" \
         "$IMAGE_NAME" \
         mcp shell slack-mcp-server
@@ -277,55 +294,73 @@ cmd_auth() {
 Slack MCP Server - Authentication Guide
 ========================================
 
-This server requires a Slack token to access your workspace. There are 3 options:
+This server lets YOU access YOUR Slack workspace - it's not a bot service.
+You authenticate as yourself to read/search messages in channels you can access.
 
-OPTION 1: Bot Token (xoxb-...) - Recommended for most users
------------------------------------------------------------
-1. Go to https://api.slack.com/apps and create a new app
-2. Under "OAuth & Permissions", add these Bot Token Scopes:
-   - channels:history, channels:read
-   - groups:history, groups:read
-   - im:history, im:read
-   - mpim:history, mpim:read
-   - users:read
-   - (optional) chat:write - for posting messages
-3. Install the app to your workspace
-4. Copy the "Bot User OAuth Token" (starts with xoxb-)
-5. Invite the bot to channels: /invite @YourBotName
+There are 3 options (in order of recommendation):
 
-Usage:
-  export SLACK_BOT_TOKEN="xoxb-your-token-here"
-  $0 mcp-tools
+OPTION 1: Browser Session (xoxc/xoxd) - Easiest, No Setup Required
+------------------------------------------------------------------
+Extract tokens from your logged-in Slack browser session.
+Works immediately, no app creation or admin approval needed.
 
-OPTION 2: User Token (xoxp-...) - Full access including search
---------------------------------------------------------------
-Same as above but use "User Token Scopes" instead of Bot scopes.
-Add: search:read for message search functionality.
-
-Usage:
-  export SLACK_MCP_XOXP_TOKEN="xoxp-your-token-here"
-  $0 mcp-tools
-
-OPTION 3: Browser Session (xoxc/xoxd) - Quick testing
-------------------------------------------------------
-Extract tokens from your browser (less secure, tokens expire):
-1. Open Slack in browser, press F12 for DevTools
-2. Console tab, run:
+Steps:
+1. Open Slack in your browser and log in
+2. Press F12 to open DevTools
+3. Go to Console tab and run:
    JSON.parse(localStorage.localConfig_v2).teams[document.location.pathname.match(/^\\/client\\/([A-Z0-9]+)/)[1]].token
-3. Copy the xoxc-... token
-4. Application tab > Cookies > find 'd' cookie value (xoxd-...)
+4. Copy the xoxc-... token
+5. Go to Application tab > Cookies > find 'd' cookie, copy its xoxd-... value
 
 Usage:
   export SLACK_MCP_XOXC_TOKEN="xoxc-..."
   export SLACK_MCP_XOXD_TOKEN="xoxd-..."
   $0 mcp-tools
 
-QUICK START
------------
-1. Get a token using one of the methods above
+Note: Tokens expire when you log out of browser. Re-extract if needed.
+
+OPTION 2: User OAuth Token (xoxp-...) - Recommended for Long-Term Use
+---------------------------------------------------------------------
+Create a Slack app with User Token Scopes for persistent access.
+Provides full functionality including message search.
+
+Steps:
+1. Go to https://api.slack.com/apps and create a new app
+2. Under "OAuth & Permissions", add these User Token Scopes:
+   - channels:history, channels:read
+   - groups:history, groups:read
+   - im:history, im:read
+   - mpim:history, mpim:read
+   - users:read, search:read
+   - (optional) chat:write - for posting messages
+3. Install the app to your workspace
+4. Copy the "User OAuth Token" (starts with xoxp-)
+
+Usage:
+  export SLACK_MCP_XOXP_TOKEN="xoxp-your-token-here"
+  $0 mcp-tools
+
+OPTION 3: Bot Token (xoxb-...) - Limited Functionality
+------------------------------------------------------
+Bot tokens work but have significant limitations:
+- Can only access channels where bot is explicitly invited
+- NO search functionality (search:read not available for bots)
+- Requires /invite @BotName in each channel
+
+Only use if you specifically need bot-style access.
+
+Usage:
+  export SLACK_BOT_TOKEN="xoxb-your-token-here"
+  $0 mcp-tools
+
+QUICK START (using browser session)
+-----------------------------------
+1. Extract xoxc/xoxd tokens from browser (see Option 1 above)
 2. Build: $0 build
-3. Test:  SLACK_BOT_TOKEN=xoxb-... $0 mcp-tools
-4. Use:   SLACK_BOT_TOKEN=xoxb-... $0 list-channels
+3. Test:  SLACK_MCP_XOXC_TOKEN=xoxc-... SLACK_MCP_XOXD_TOKEN=xoxd-... $0 mcp-tools
+4. Use:   SLACK_MCP_XOXC_TOKEN=xoxc-... SLACK_MCP_XOXD_TOKEN=xoxd-... $0 list-channels
+
+Token Priority: xoxp > xoxb > xoxc/xoxd (if multiple set)
 
 More info: https://github.com/korotovsky/slack-mcp-server/blob/master/docs/01-authentication-setup.md
 EOF
@@ -369,20 +404,26 @@ Convenience Commands (WIP, to be tested):
   read-thread <channel_id> <thread_ts>    Read thread replies
 
 Environment Variables:
-  IMAGE_NAME        Docker image name (default: $IMAGE_NAME)
-  CONTAINER_NAME    Container name (default: $CONTAINER_NAME)
-  SLACK_BOT_TOKEN   Slack Bot OAuth Token (required for CLI commands)
+  IMAGE_NAME              Docker image name (default: $IMAGE_NAME)
+  CONTAINER_NAME          Container name (default: $CONTAINER_NAME)
+
+  Authentication (use one set):
+  SLACK_MCP_XOXC_TOKEN +  Browser session tokens (easiest, run: $0 auth)
+  SLACK_MCP_XOXD_TOKEN
+  SLACK_MCP_XOXP_TOKEN    User OAuth token (recommended for long-term)
+  SLACK_BOT_TOKEN         Bot token (limited: invited channels only, no search)
 
 Examples:
+  $0 auth                                     # Show how to get tokens
   $0 build                                    # Build the image
-  $0 test                                     # Verify module loads
-  SLACK_BOT_TOKEN=xoxb-... $0 run             # Run MCP server with token
+  $0 test                                     # Verify build works
 
-  # CLI Examples (require SLACK_BOT_TOKEN):
-  SLACK_BOT_TOKEN=xoxb-... $0 mcp-tools       # List available tools
-  SLACK_BOT_TOKEN=xoxb-... $0 mcp-shell       # Interactive shell
-  SLACK_BOT_TOKEN=xoxb-... $0 list-channels   # List all channels
-  SLACK_BOT_TOKEN=xoxb-... $0 read-channel C1234567890 7d  # Read 7 days
+  # Using browser session tokens (easiest):
+  SLACK_MCP_XOXC_TOKEN=xoxc-... SLACK_MCP_XOXD_TOKEN=xoxd-... $0 mcp-tools
+  SLACK_MCP_XOXC_TOKEN=xoxc-... SLACK_MCP_XOXD_TOKEN=xoxd-... $0 list-channels
+
+  # Using user OAuth token:
+  SLACK_MCP_XOXP_TOKEN=xoxp-... $0 mcp-tools
 
   $0 clean                                    # Clean up
 EOF

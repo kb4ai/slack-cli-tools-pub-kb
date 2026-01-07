@@ -21,53 +21,61 @@ Additionally, with the included [f/mcptools](https://github.com/f/mcptools), you
 
 ## Quick Start
 
+This tool lets **you** access **your own** Slack workspace - it's not a bot service.
+
 ```bash
-# 1. See how to get a Slack token
+# 1. See authentication options
 ./manage.sh auth
 
 # 2. Build the image
 ./manage.sh build
 
-# 3. Test with your token
-SLACK_BOT_TOKEN=xoxb-your-token ./manage.sh mcp-tools
+# 3. Get tokens from your browser (easiest method):
+#    - Open Slack in browser, F12 for DevTools
+#    - Console: JSON.parse(localStorage.localConfig_v2).teams[document.location.pathname.match(/^\/client\/([A-Z0-9]+)/)[1]].token
+#    - Application > Cookies > 'd' cookie value
 
-# 4. List your channels
-SLACK_BOT_TOKEN=xoxb-your-token ./manage.sh list-channels
+# 4. Test with your tokens
+SLACK_MCP_XOXC_TOKEN=xoxc-... SLACK_MCP_XOXD_TOKEN=xoxd-... ./manage.sh mcp-tools
+
+# 5. List your channels
+SLACK_MCP_XOXC_TOKEN=xoxc-... SLACK_MCP_XOXD_TOKEN=xoxd-... ./manage.sh list-channels
 ```
 
 ## Authentication
 
 Run `./manage.sh auth` for detailed instructions. Summary:
 
-### Option 1: Bot Token (Recommended)
+### Option 1: Browser Session (Easiest - No Setup)
 
-1. Create app at https://api.slack.com/apps
-2. Add Bot Token Scopes: `channels:history`, `channels:read`, `groups:history`, `groups:read`, `im:history`, `im:read`, `mpim:history`, `mpim:read`, `users:read`
-3. Install to workspace and copy the `xoxb-...` token
-4. Invite bot to channels: `/invite @YourBotName`
+Extract tokens from your logged-in Slack browser session. No app creation needed.
 
 ```bash
-export SLACK_BOT_TOKEN="xoxb-your-token"
+export SLACK_MCP_XOXC_TOKEN="xoxc-..."
+export SLACK_MCP_XOXD_TOKEN="xoxd-..."
 ./manage.sh list-channels
 ```
 
-### Option 2: User Token (Full Access)
+### Option 2: User OAuth Token (Recommended for Long-Term)
 
-Same as above but use User Token Scopes. Adds `search:read` for message search.
+Create a Slack app with User Token Scopes for persistent access with full functionality.
+
+1. Create app at https://api.slack.com/apps
+2. Add User Token Scopes: `channels:history`, `channels:read`, `groups:history`, `groups:read`, `im:history`, `im:read`, `mpim:history`, `mpim:read`, `users:read`, `search:read`
+3. Install to workspace and copy the `xoxp-...` token
 
 ```bash
 export SLACK_MCP_XOXP_TOKEN="xoxp-your-token"
 ./manage.sh mcp-tools
 ```
 
-### Option 3: Browser Session (Quick Testing)
+### Option 3: Bot Token (Limited)
 
-Extract from browser DevTools - see `./manage.sh auth` for details.
+Bot tokens have restrictions: invited channels only, no search API.
 
 ```bash
-export SLACK_MCP_XOXC_TOKEN="xoxc-..."
-export SLACK_MCP_XOXD_TOKEN="xoxd-..."
-./manage.sh mcp-tools
+export SLACK_BOT_TOKEN="xoxb-your-token"
+./manage.sh mcp-tools  # Limited functionality
 ```
 
 ## Usage
@@ -182,7 +190,13 @@ To use with Claude Desktop or other MCP clients, add to your MCP configuration:
 
 ## Environment Variables
 
-* `SLACK_BOT_TOKEN` - Required. Your Slack Bot OAuth Token (starts with `xoxb-`)
+Authentication (use one):
+
+* `SLACK_MCP_XOXC_TOKEN` + `SLACK_MCP_XOXD_TOKEN` - Browser session tokens (easiest)
+* `SLACK_MCP_XOXP_TOKEN` - User OAuth token (recommended for long-term)
+* `SLACK_BOT_TOKEN` - Bot token (limited functionality)
+
+Priority when multiple set: `xoxp` > `xoxb` > `xoxc/xoxd`
 
 ## References
 
